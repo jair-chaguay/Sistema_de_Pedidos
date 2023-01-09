@@ -51,8 +51,8 @@
                   <Insets left="50.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="txtUsuario" maxWidth="-Infinity" onKeyTyped="#eventKey" prefWidth="140.0" GridPane.columnIndex="1" />
-            <PasswordField fx:id="txtContraseña" maxWidth="-Infinity" onKeyTyped="#eventKey" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtUsuario" maxWidth="-Infinity" prefWidth="140.0" GridPane.columnIndex="1" />
+            <PasswordField fx:id="txtContraseña" maxWidth="-Infinity" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <HBox fx:id="contenedorIB" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
