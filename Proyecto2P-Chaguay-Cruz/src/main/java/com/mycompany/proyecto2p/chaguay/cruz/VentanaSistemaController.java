@@ -6,6 +6,7 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,65 +29,52 @@ public class VentanaSistemaController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     private VBox root;
     
     @FXML
+    private HBox seccionTitle;
+
+    @FXML
     private Label lbltTittle;
-        
+
     @FXML
     private GridPane gridUserPasswrd;
-    
+
     @FXML
     private Label lblUsuario;
-    
+
     @FXML
     private TextField txtUsuario;
-    
+
     @FXML
     private Label lblContraseña;
-        
+
     @FXML
     private PasswordField txtContraseña;
-    
+
     @FXML
     private HBox contenedorIB;
-    
+
     @FXML
     private ImageView imgRepartitor;
     @FXML
     private VBox contButton;
-    
-    @FXML 
+
+    @FXML
     private Button btnIngresar;
-    
+
     @FXML
     private ImageView Imagehmbrg;
-    
+   
     @FXML
-    void eventKey(KeyEvent event){
-        Object evt= event.getSource();
-        if(evt.equals(txtUsuario)){
-            if(event.getCharacter().equals(" ")){
-                event.consume();
-            }
-            
-        }else if(evt.equals(txtContraseña)){
-            if(event.getCharacter().equals(" ")){
-                event.consume();
-            }
-        }
-        
+    void IngresarOptions() {
+
     }
-    
-    @FXML
-    void IngresarOptions(){
-        
-    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
