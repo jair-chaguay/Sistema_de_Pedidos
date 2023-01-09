@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController">
    <children>
       <HBox fx:id="seccionTitle" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
