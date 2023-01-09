@@ -36,7 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.mycompany.proyecto2p.chaguay.cruz.App</mainClass>
+                    <mainClass>com.mycompany.proyecto2p.chaguay.cruz.Principal</mainClass>
                 </configuration>
                 <executions>
                     <execution>
