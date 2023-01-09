@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -64,7 +65,18 @@ public class VentanaSistemaController implements Initializable {
     private ImageView Imagehmbrg;
     
     @FXML
-    void eventKey(){
+    void eventKey(KeyEvent event){
+        Object evt= event.getSource();
+        if(evt.equals(txtUsuario)){
+            if(event.getCharacter().equals(" ")){
+                event.consume();
+            }
+            
+        }else if(evt.equals(txtContraseña)){
+            if(event.getCharacter().equals(" ")){
+                event.consume();
+            }
+        }
         
     }
     
