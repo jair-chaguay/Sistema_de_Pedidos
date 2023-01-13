@@ -4,7 +4,13 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz;
 
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,11 +73,24 @@ public class VentanaSistemaController implements Initializable {
     @FXML
     private ImageView Imagehmbrg;
    
+    
     @FXML
     void IngresarOptions() {
 
     }
+    static ArrayList<Usuario> listUsuario=new ArrayList<>();
+    
+    public void validarUsuario(){
+        try (BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"AutosSeleccionados"))) {
+                String linea;
+                while((linea=bfr.readLine())!=null){
+                    
+                }
 
+            } catch (IOException e) {
+                System.out.println("No se ha registrado ningún auto");
+            }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
