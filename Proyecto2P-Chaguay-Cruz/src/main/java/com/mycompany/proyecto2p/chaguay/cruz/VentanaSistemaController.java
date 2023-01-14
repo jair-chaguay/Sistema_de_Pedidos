@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,20 +76,29 @@ public class VentanaSistemaController implements Initializable {
    
     
     @FXML
-    void IngresarOptions() {
+    void IngresarOptions(ActionEvent event) {
+        
+        Object evt =event.getSource();
+        if(evt.equals(btnIngresar)){
+            if(!txtUsuario.getText().isEmpty() && !txtContraseña.getText().isEmpty()){
+                String user= txtUsuario.getText();
+                String passwrd=txtContraseña.getText();
+                
+            }
+        }
 
+        
     }
     static ArrayList<Usuario> listUsuario=new ArrayList<>();
     
     public void validarUsuario(){
-        try (BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"AutosSeleccionados"))) {
+        try (BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"Usuarios.txt"))) {
                 String linea;
                 while((linea=bfr.readLine())!=null){
                     
                 }
 
             } catch (IOException e) {
-                System.out.println("No se ha registrado ningún auto");
             }
     }
     @Override
