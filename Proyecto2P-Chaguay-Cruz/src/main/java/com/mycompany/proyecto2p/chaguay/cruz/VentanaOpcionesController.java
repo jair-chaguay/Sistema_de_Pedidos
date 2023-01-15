@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -30,16 +31,20 @@ public class VentanaOpcionesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private VBox rootOpciones;
+    
     @FXML
     private Button btnGrabar;
     
     @FXML
     private Label LblUsuario;
 
-    private VentanaSistemaController s;
     
     
     public void closeWindows() {
+        rootOpciones.setStyle("-fx-backround-image:"+Principal.pathImages+"FSA.PNG");
         try {
             
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaSistema.fxml"));
