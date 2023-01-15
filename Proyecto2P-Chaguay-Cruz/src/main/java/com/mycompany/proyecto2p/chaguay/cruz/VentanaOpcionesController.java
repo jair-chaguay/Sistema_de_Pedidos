@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -31,26 +32,35 @@ public class VentanaOpcionesController implements Initializable {
     }    
     @FXML
     private Button btnGrabar;
-
     
-    void closeWindows() {
+    @FXML
+    private Label LblUsuario;
+
+    private VentanaSistemaController s;
+    
+    
+    public void closeWindows() {
         try {
-            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaSistemaConroller"));
+            
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaSistema.fxml"));
             
             Parent root = loader.load();
-            VentanaOpcionesController controlador= loader.getController();
             Scene scene = new Scene(root, 640, 480);
             Stage stage=new Stage();
             stage.setScene(scene);
             stage.show();
-            
             Stage myStage = (Stage) this.btnGrabar.getScene().getWindow();
-            myStage.close();
-            
+            myStage.close();                       
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         
     }
+    
+    void init(String txt){
+        LblUsuario.setText("Bienvenid@ " +txt);
+        
+    }
+  
     
 }

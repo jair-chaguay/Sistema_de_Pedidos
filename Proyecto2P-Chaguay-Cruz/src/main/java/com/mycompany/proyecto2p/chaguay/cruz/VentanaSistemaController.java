@@ -81,24 +81,25 @@ public class VentanaSistemaController implements Initializable {
 
     @FXML
     void IngresarOptions(ActionEvent event) {
-        
+
+        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
         try {
-            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
-            
             Parent root = loader.load();
-            VentanaOpcionesController controlador= loader.getController();
+
+            VentanaOpcionesController controlador = loader.getController();
             Scene scene = new Scene(root, 640, 480);
-            Stage stage=new Stage();
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            controlador.init(txtUsuario.getText());
             stage.setOnCloseRequest(e -> controlador.closeWindows());
             Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
             myStage.close();
+
             
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
 //    static ArrayList<Usuario> listUsuario=new ArrayList<>();
