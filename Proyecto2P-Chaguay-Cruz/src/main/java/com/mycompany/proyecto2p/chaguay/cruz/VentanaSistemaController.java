@@ -95,8 +95,7 @@ public class VentanaSistemaController implements Initializable {
             alerta.setHeaderText("Acceso denegado");
             alerta.setContentText("Por favor ingrese un usario y/o contrasñeas correctos");
             alerta.showAndWait();
-            txtUsuario.clear();
-            txtContraseña.clear();  
+        
             
         }
 
@@ -121,24 +120,17 @@ public class VentanaSistemaController implements Initializable {
 
         try ( BufferedReader br = new BufferedReader(new FileReader(Principal.pathFiles+"Usuarios.txt"))) {
             String linea;
-
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
                 String[] pr = linea.split(";");
                 parametros.add(pr);
-
             }
-
         } catch (IOException ioe) {
             System.out.println("Ha ocurrido un error!");
 
         }
-
         for (String[] s : parametros) {
-            System.out.println("Entro al for");
             String u = s[0];
             String c = s[1];
-
             if (usuario.equals(u) && contrasena.equals(c)) {
                 return true;
             } 
@@ -146,7 +138,6 @@ public class VentanaSistemaController implements Initializable {
         return false;
     }
     
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
