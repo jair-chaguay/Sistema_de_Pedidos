@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -105,8 +106,8 @@ public class VentanaSistemaController implements Initializable {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
         Parent root = loader.load();
         VentanaOpcionesController controlador = loader.getController();
-        Scene scene = new Scene(root, 640, 480);
-        Stage stage = new Stage();
+        Stage stage=(Stage)((Node)ae.getSource()).getScene().getWindow();
+        Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
         controlador.init(txtUsuario.getText());
@@ -116,27 +117,40 @@ public class VentanaSistemaController implements Initializable {
     }
 
     public boolean verificacionUsuario(String usuario, String contrasena) {
-        ArrayList<String[]> usuarioss = new ArrayList<>();
-        try ( BufferedReader br = new BufferedReader(new FileReader(Principal.pathFiles + "Usuarios.txt"))) {
+        ArrayList<String[]> parametros = new ArrayList<>();
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(Principal.pathFiles+"Usuarios.txt"))) {
             String linea;
+
             while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
                 String[] pr = linea.split(";");
-                usuarioss.add(pr);
+                parametros.add(pr);
+
             }
+
         } catch (IOException ioe) {
             System.out.println("Ha ocurrido un error!");
+
         }
-        for (String[] s : usuarioss) {
+
+        for (String[] s : parametros) {
+            System.out.println("Entro al for");
             String u = s[0];
             String c = s[1];
-            return usuario.equals(u) || contrasena.equals(c);
+
+            if (usuario.equals(u) && contrasena.equals(c)) {
+                return true;
+            } 
         }
         return false;
     }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
 }
+
+
