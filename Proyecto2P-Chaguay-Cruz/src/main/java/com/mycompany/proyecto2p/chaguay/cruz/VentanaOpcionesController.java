@@ -44,7 +44,7 @@ public class VentanaOpcionesController implements Initializable {
     
     
     public void closeWindows() {
-        rootOpciones.setStyle("-fx-backround-image:"+Principal.pathImages+"FSA.PNG");
+       
         try {
             
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaSistema.fxml"));

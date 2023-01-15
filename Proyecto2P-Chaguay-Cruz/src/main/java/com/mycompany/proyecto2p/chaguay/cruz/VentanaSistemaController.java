@@ -19,6 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -80,45 +82,58 @@ public class VentanaSistemaController implements Initializable {
     private ImageView Imagehmbrg;
 
     @FXML
-    void IngresarOptions(ActionEvent event) {
+    void IngresarOptions(ActionEvent ae) throws IOException {
+        String user = txtUsuario.getText();
+        String paswrd = txtContraseña.getText();
 
-        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
-        try {
-            Parent root = loader.load();
-
-            VentanaOpcionesController controlador = loader.getController();
-            Scene scene = new Scene(root, 640, 480);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            controlador.init(txtUsuario.getText());
-            stage.setOnCloseRequest(e -> controlador.closeWindows());
-            Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
-            myStage.close();
-
+        if (verificacionUsuario(user, paswrd) == true) {            
+            VistaOpciones(ae);
+        } else {
+            Alert alerta=new Alert(AlertType.ERROR);
+            alerta.setTitle("Inicio de sesión fallido");
+            alerta.setHeaderText("Acceso denegado");
+            alerta.setContentText("Por favor ingrese un usario y/o contrasñeas correctos");
+            alerta.showAndWait();
+            txtUsuario.clear();
+            txtContraseña.clear();  
             
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
+
     }
 
-//    static ArrayList<Usuario> listUsuario=new ArrayList<>();
-//    
-//    public void validarUsuario(){
-//        try (BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"Usuarios.txt"))) {
-//                String linea;
-//                while((linea=bfr.readLine())!=null){
-//                    String[] lineas=linea.strip().split(";");
-//                            String user=lineas[0];
-//                            String psswrd=lineas[1];
-//                            listUsuario=new ArrayList<>();
-//                            Usuario n=new Usuario(user,psswrd);
-//                            listUsuario.add(n);
-//                }
-//
-//            } catch (IOException e) {
-//            }
-//    }
+    void VistaOpciones(ActionEvent ae) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
+        Parent root = loader.load();
+        VentanaOpcionesController controlador = loader.getController();
+        Scene scene = new Scene(root, 640, 480);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        controlador.init(txtUsuario.getText());
+        stage.setOnCloseRequest(e -> controlador.closeWindows());
+        Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
+        myStage.close();
+    }
+
+    public boolean verificacionUsuario(String usuario, String contrasena) {
+        ArrayList<String[]> usuarioss = new ArrayList<>();
+        try ( BufferedReader br = new BufferedReader(new FileReader(Principal.pathFiles + "Usuarios.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] pr = linea.split(";");
+                usuarioss.add(pr);
+            }
+        } catch (IOException ioe) {
+            System.out.println("Ha ocurrido un error!");
+        }
+        for (String[] s : usuarioss) {
+            String u = s[0];
+            String c = s[1];
+            return usuario.equals(u) || contrasena.equals(c);
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
