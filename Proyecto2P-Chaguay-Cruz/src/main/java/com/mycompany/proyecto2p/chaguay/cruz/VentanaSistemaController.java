@@ -106,7 +106,7 @@ public class VentanaSistemaController implements Initializable {
         Parent root = loader.load();
         VentanaOpcionesController controlador = loader.getController();
         Stage stage=(Stage)((Node)ae.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+        Scene scene=new Scene(root,640,480);
         stage.setScene(scene);
         stage.show();
         controlador.init(txtUsuario.getText());
