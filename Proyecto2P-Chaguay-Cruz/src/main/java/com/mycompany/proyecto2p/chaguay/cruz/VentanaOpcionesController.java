@@ -53,21 +53,14 @@ public class VentanaOpcionesController implements Initializable {
     
     @FXML
     void localcercano(ActionEvent e){
-        try{
-        Image image=new Image(new FileInputStream(Principal.pathImages+"mapa2.png"));
-        ImageView imagev=new ImageView(image);
-        imagev.setFitHeight(480);
-        imagev.setFitWidth(640);
+                
         Group root=new Group();
-        root.getChildren().add(imagev);
         Scene scene=new Scene(root, 640,480);
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-    }catch(FileNotFoundException ex){
-        
-    }
+   
     }
     @FXML
     void hazPedido(ActionEvent evt){

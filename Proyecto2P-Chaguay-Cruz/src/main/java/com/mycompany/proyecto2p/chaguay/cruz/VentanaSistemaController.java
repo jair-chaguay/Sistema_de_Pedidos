@@ -112,8 +112,7 @@ public class VentanaSistemaController implements Initializable {
         stage.show();
         controlador.init(txtUsuario.getText());
         stage.setOnCloseRequest(e -> controlador.closeWindows());
-        Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
-        myStage.close();
+        
     }
 
     public boolean verificacionUsuario(String usuario, String contrasena) {
