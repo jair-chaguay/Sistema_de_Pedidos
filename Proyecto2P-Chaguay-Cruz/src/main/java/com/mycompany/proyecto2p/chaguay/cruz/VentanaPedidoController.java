@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
  *
  * @author mcruz
  */
-public class VentanaHaztupedidoController implements Initializable {
+public class VentanaPedidoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

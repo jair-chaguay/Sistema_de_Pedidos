@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import java.io.IOException;
@@ -11,10 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author HP
- */
+
 public class Principal extends Application{
     private static Scene scene;
     public static String pathFiles="src/main/resources/Files/";
