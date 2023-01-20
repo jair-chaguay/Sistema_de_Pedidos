@@ -1,0 +1,8 @@
+Nombre,dirección,horario,coordenadaX,coordenadaY
+ssss,sssss,sssss,594,347
+aaaaa,aaaaa,aaaaa,154,375
+bbbbb,bbbbb,bbbbb,22,254
+ccccc,ccccc,ccccc,318,455
+ddddd,dddd,ddddd,278,470
+eeeee,eeeee,eeeeee377,120
+
