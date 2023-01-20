@@ -69,7 +69,7 @@ public class VentanaOpcionesController implements Initializable {
     @FXML
     void hazPedido(ActionEvent evt){
         try {
-            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaMapa.fxml"));
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
             Parent root= loader.load();
             Scene scene=new Scene(root, 640,480);
             Stage stage=new Stage();
