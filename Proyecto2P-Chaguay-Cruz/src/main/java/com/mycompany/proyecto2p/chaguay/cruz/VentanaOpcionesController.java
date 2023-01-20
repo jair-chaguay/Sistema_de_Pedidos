@@ -37,29 +37,33 @@ public class VentanaOpcionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
     @FXML
     private VBox rootOpciones;
-    
+//    
     @FXML
     private Button btnGrabar;
     
     @FXML
-    private Label LblUsuario;
-    
-    @FXML HBox seccionImg;
+    private Label LblUsuario;  
     
     
     @FXML
     void localcercano(ActionEvent e){
                 
-        Group root=new Group();
-        Scene scene=new Scene(root, 640,480);
-        Stage stage=new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaMapa.fxml"));
+            Parent root= loader.load();
+            Scene scene=new Scene(root, 640,480);
+            Stage stage=new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
    
     }
     @FXML

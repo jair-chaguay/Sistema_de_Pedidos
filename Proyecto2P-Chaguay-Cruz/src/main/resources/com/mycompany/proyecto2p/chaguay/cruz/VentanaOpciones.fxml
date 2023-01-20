@@ -3,53 +3,51 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="rootOpciones" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" styleClass="rotOpciones" stylesheets="@../../../../../java/com/mycompany/proyecto2p/chaguay/cruz/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaOpcionesController">
+<VBox fx:id="rootOpciones" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" spacing="30.0" styleClass="rotOpciones" stylesheets="@../../../../../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaOpcionesController">
    <children>
-      <HBox fx:id="seccionImg">
-         <children>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="318.0" />
-            <VBox alignment="TOP_CENTER" prefHeight="483.0" prefWidth="336.0" spacing="45.0">
-               <children>
-                  <Label fx:id="LblUsuario" textFill="ORANGE">
-                     <font>
-                        <Font name="System Bold" size="26.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Elige la opción que prefieras" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="199.0" prefWidth="322.0" spacing="30.0">
-                     <children>
-                        <Button fx:id="btnGrabar" mnemonicParsing="false" onAction="#localcercano" prefWidth="200.0" style="-fx-background-color: orange;" text="Encuentra el local más cercano">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#hazPedido" prefWidth="200.0" style="-fx-background-color: orange;" text="Haz tu pedido">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+      <Label fx:id="LblUsuario" textAlignment="CENTER" textFill="ORANGE">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+         <VBox.margin>
+            <Insets right="40.0" top="20.0" />
+         </VBox.margin>
+      </Label>
+      <Label text="Elige la opción que prefieras" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <VBox.margin>
+            <Insets right="120.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
+      </Label>
+      <Button fx:id="btnGrabar" mnemonicParsing="false" onAction="#localcercano" style="-fx-background-color: orange;" text="Encuentra el local más cercano">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <VBox.margin>
+            <Insets right="100.0" top="30.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="14.0" right="14.0" top="5.0" />
+         </padding>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#hazPedido" style="-fx-background-color: orange;" text="Haz tu pedido">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <VBox.margin>
+            <Insets right="101.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="62.0" right="62.0" top="5.0" />
+         </padding>
+      </Button>
    </children>
 </VBox>
