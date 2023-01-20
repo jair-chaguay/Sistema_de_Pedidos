@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,7 +26,7 @@ public class VentanaPedidoController implements Initializable {
     }  
     
     @FXML
-    private VBox root;
+    private FlowPane root;
     
     @FXML
     private HBox seccionDatos;
