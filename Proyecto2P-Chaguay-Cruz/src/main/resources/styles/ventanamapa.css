@@ -3,6 +3,6 @@
  */
 
 .Mapa{
-    -fx-background-image: url("../..//resources/Images/mapa2.png");
+    -fx-background-image: url("mapa2.png");
     -fx-background-size: 100% 100%;
 }

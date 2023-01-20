@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class Principal extends Application{
     private static Scene scene;
     public static String pathFiles="src/main/resources/Files/";
-    public static String pathImages="src/main/resources/Images/";
+    public static String pathImages="src/main/resources/styles/";
     
     @Override
     public void start(Stage s) throws IOException{
