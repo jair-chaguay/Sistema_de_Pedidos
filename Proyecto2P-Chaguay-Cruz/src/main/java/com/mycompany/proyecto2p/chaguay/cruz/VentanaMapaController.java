@@ -62,6 +62,7 @@ public class VentanaMapaController implements Initializable {
             imgv.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e){
                     Alert al=new Alert(AlertType.INFORMATION);
+                    al.showAndWait();
                     
                 }
             });
