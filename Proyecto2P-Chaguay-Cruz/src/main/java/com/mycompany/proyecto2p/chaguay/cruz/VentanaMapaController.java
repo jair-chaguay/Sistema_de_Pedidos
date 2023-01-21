@@ -6,12 +6,21 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Locales;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -23,33 +32,41 @@ public class VentanaMapaController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    static ArrayList<Locales> local;
+    private ArrayList<Locales> local;
+    @FXML 
+    private Pane rootPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
+    }
+
     
-    public static ArrayList<Locales>leerLocales(){
-        local=new ArrayList<>();
-        try(BufferedReader bfr= new BufferedReader(new FileReader(Principal.pathFiles+"Locales.txt"))){
-            String linea;
-            while((linea=bfr.readLine())!=null){
-                String[] lineas=linea.trim().strip().split(",");
-                String nombre=lineas[0];
-                String direccion=lineas[1];
-                String horario=lineas[2];
-                int coordX=Integer.parseInt(lineas[3]);
-                int coordY=Integer.parseInt(lineas[4]);
-                Locales lcal=new Locales(nombre,direccion,horario,coordX,coordY);
-                local.add(lcal);
+    void agregarImgview(){
+        local=Locales.leerLocales();
+        ImageView imgv=null;
+        for(Locales loc:local){
+            try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.jpg")){
+                Image img=new Image(input,20,20,false,false);
+                imgv=new ImageView(img);
+                imgv.setLayoutX(loc.getCoordX());
+                imgv.setLayoutY(loc.getCoordY());
+            }catch(IOException ex){
                 
             }
             
-        }catch(IOException ex){
+            String name=loc.getNombre();
+            String direccion=loc.getDireccion();
+            String horario=loc.getHorario();
             
+            imgv.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e){
+                    Alert al=new Alert(AlertType.INFORMATION);
+                    
+                }
+            });
+                        
         }
-        return null;
     }
-   
-    
+
 }
