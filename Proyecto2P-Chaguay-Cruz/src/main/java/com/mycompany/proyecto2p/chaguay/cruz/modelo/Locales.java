@@ -72,15 +72,10 @@ public class Locales {
         public static ArrayList<Locales> leerLocales() {
         try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Locales.txt"))) {
             ArrayList<Locales> local = new ArrayList<>();
-            String linea;
+            String linea=null;
             while ((linea = bfr.readLine()) != null) {
-                String[] lineas = linea.trim().strip().split(",");
-                String nombre = lineas[0];
-                String direccion = lineas[1];
-                String horario = lineas[2];
-                double coordX = Double.parseDouble(lineas[3]);
-                double coordY = Double.parseDouble(lineas[4]);
-                Locales lcal = new Locales(nombre, direccion, horario, coordX, coordY);
+                String[] lineas = linea.trim().strip().split(",");                
+                Locales lcal = new Locales(lineas[0], lineas[1], lineas[2], Double.parseDouble(lineas[3]), Double.parseDouble(lineas[4]));
                 local.add(lcal);
 
             }

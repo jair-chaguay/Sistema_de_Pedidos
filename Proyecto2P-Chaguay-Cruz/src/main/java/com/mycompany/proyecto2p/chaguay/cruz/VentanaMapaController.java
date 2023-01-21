@@ -39,11 +39,12 @@ public class VentanaMapaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        local=Locales.leerLocales();
+        
     }
 
     
-    void agregarImgview(){
-        local=Locales.leerLocales();
+    void agregarImgview(){        
         ImageView imgv=null;
         for(Locales loc:local){
             try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.jpg")){
@@ -59,6 +60,7 @@ public class VentanaMapaController implements Initializable {
             String direccion=loc.getDireccion();
             String horario=loc.getHorario();
             
+            rootPane.getChildren().add(imgv);
             imgv.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e){
                     Alert al=new Alert(AlertType.INFORMATION);

@@ -21,6 +21,7 @@ public class Principal extends Application{
         scene = new Scene(root, 640,480);
         s.setScene(scene);
         s.setTitle("The Good Burguer Restaurant");
+        s.show();
         s.setResizable(false);
         
         
