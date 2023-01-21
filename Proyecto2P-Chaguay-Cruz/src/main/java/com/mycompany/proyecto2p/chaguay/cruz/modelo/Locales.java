@@ -4,6 +4,12 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz.modelo;
 
+import com.mycompany.proyecto2p.chaguay.cruz.Principal;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author HP
@@ -12,10 +18,10 @@ public class Locales {
     String nombre;
     String direccion;
     String horario;
-    int coordX;
-    int coordY;
+    double coordX;
+    double coordY;
     
-    public Locales(String nombre, String direccion, String horario, int coordX, int coordY){
+    public Locales(String nombre, String direccion, String horario, double coordX, double coordY){
         this.nombre=nombre;
         this.direccion=direccion;
         this.horario=horario;
@@ -47,22 +53,43 @@ public class Locales {
         this.horario=horario;
     }
     
-    public int getCoordX(){
+    public double getCoordX(){
         return coordX;
     }
     
-    public void setCoordX(int coordX){
+    public void setCoordX(double coordX){
         this.coordX=coordX;
     }
     
-    public int getCoordY(){
+    public double getCoordY(){
         return coordY;
     }
     
-    public void setCoordY(int coordY){
+    public void setCoordY(double coordY){
         this.coordY=coordY;
     }
     
+        public static ArrayList<Locales> leerLocales() {
+        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Locales.txt"))) {
+            ArrayList<Locales> local = new ArrayList<>();
+            String linea;
+            while ((linea = bfr.readLine()) != null) {
+                String[] lineas = linea.trim().strip().split(",");
+                String nombre = lineas[0];
+                String direccion = lineas[1];
+                String horario = lineas[2];
+                double coordX = Double.parseDouble(lineas[3]);
+                double coordY = Double.parseDouble(lineas[4]);
+                Locales lcal = new Locales(nombre, direccion, horario, coordX, coordY);
+                local.add(lcal);
+
+            }
+            return local;
+
+        } catch (IOException ex) {
+            return null;
+        }
+    }
     
     
 }
