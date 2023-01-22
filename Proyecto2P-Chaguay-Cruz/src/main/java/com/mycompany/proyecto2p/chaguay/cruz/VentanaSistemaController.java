@@ -108,7 +108,7 @@ public class VentanaSistemaController implements Initializable {
         Stage stage=(Stage)((Node)ae.getSource()).getScene().getWindow();
         Scene scene=new Scene(root,640,480);
         stage.setScene(scene);
-        stage.setResizable(false);
+      
         stage.show();
         controlador.init(txtUsuario.getText());
         stage.setOnCloseRequest(e -> controlador.closeWindows());

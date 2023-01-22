@@ -40,6 +40,7 @@ public class VentanaMapaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         local=Locales.leerLocales();
+        agregarImgview();
         
     }
 
@@ -47,29 +48,35 @@ public class VentanaMapaController implements Initializable {
     void agregarImgview(){        
         ImageView imgv=null;
         for(Locales loc:local){
-            try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.jpg")){
-                Image img=new Image(input,20,20,false,false);
+            try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.png")){
+                Image img=new Image(input,30,30,false,false);                
                 imgv=new ImageView(img);
                 imgv.setLayoutX(loc.getCoordX());
                 imgv.setLayoutY(loc.getCoordY());
+               
             }catch(IOException ex){
                 
             }
             
             String name=loc.getNombre();
             String direccion=loc.getDireccion();
-            String horario=loc.getHorario();
+            String horario=loc.getHorario();           
             
-            rootPane.getChildren().add(imgv);
+            
+            rootPane.getChildren().add(imgv);            
             imgv.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e){
-                    Alert al=new Alert(AlertType.INFORMATION);
+                    Alert al=new Alert(AlertType.INFORMATION);                    
                     al.showAndWait();
                     
                 }
             });
                         
         }
+    }
+    
+    void MostrarPopUp(String d){
+        
     }
 
 }

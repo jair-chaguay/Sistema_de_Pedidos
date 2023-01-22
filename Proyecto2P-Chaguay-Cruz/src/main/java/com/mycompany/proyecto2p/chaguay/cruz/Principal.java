@@ -22,7 +22,7 @@ public class Principal extends Application{
         s.setScene(scene);
         s.setTitle("The Good Burguer Restaurant");
         s.show();
-        s.setResizable(false);
+      
         
         
         

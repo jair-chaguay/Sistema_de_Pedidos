@@ -58,8 +58,7 @@ public class VentanaOpcionesController implements Initializable {
             Parent root= loader.load();
             Scene scene=new Scene(root, 640,480);
             Stage stage=new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setScene(scene);            
             stage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
