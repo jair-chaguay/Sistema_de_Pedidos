@@ -49,7 +49,7 @@ public class VentanaMapaController implements Initializable {
         ImageView imgv=null;
         for(Locales loc:local){
             try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.png")){
-                Image img=new Image(input,30,30,false,false);                
+                Image img=new Image(input,40,40,false,false);                
                 imgv=new ImageView(img);
                 imgv.setLayoutX(loc.getCoordX());
                 imgv.setLayoutY(loc.getCoordY());
