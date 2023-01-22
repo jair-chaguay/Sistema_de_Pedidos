@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import java.util.Random;
 
 /**
  * FXML Controller class
@@ -35,6 +36,7 @@ public class VentanaMapaController implements Initializable {
     private ArrayList<Locales> local;
     @FXML 
     private Pane rootPane;
+    int n;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,8 +77,23 @@ public class VentanaMapaController implements Initializable {
         }
     }
     
-    void MostrarPopUp(String d){
+    void MostrarPopUp(){
         
+        int d=1000;
+        Thread t1=new Thread(new Runnable(){
+            @Override
+            public void run(){
+                
+                Random r = new Random();
+                n=r.nextInt(10);
+                agregarImgview();
+            }            
+        });
+        try{
+            Thread.sleep(n*1000);
+        }catch(InterruptedException ex){
+            
+        }
     }
 
 }
