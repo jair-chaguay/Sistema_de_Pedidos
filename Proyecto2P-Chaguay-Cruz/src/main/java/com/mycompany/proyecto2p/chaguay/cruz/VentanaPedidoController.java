@@ -5,10 +5,13 @@
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -20,56 +23,52 @@ import javafx.scene.layout.VBox;
  * @author mcruz
  */
 public class VentanaPedidoController implements Initializable {
+
+    private ArrayList<Menu> mn;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            mn = Menu.leerArchivo();
+            cargarCombo();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
         // TODO
-    }  
-    
+    }
+
     @FXML
-    private FlowPane root;
-    
+    private VBox root;
+
     @FXML
-    private HBox seccionDatos;
-    
+    private Button btnContinuar;
+
     @FXML
-    private Label lbldatos;
-    
+    private Button btnLimpiar;
+
     @FXML
-    private Label lblDescripcion;
-    
+    private Label lblSubtotal;
+
     @FXML
-    private HBox ContButton;
-    
+    private Label lblIva;
+
     @FXML
-    private Label lblPrecio;
-    
-    @FXML
-    private Label lblCantidad;
-    
+    private Label lblTotal;
+
     @FXML
     private ComboBox<Menu> cbxmenu;
-    
-    
+
     @FXML
     private ComboBox<Menu> cbxordenar;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    void cargarCombo() throws IOException {
+        for (Menu menu : mn) {
+            if (menu.getDescripcion().equals("F")) {
+
+            }
+
+        }
+    }
+
 }
