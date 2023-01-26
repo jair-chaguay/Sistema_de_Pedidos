@@ -39,6 +39,7 @@ public class VentanaPedidoController implements Initializable {
 
     private static ArrayList<Menu> mn = new ArrayList<>();
     private static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    double total;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -134,7 +135,8 @@ public class VentanaPedidoController implements Initializable {
                     @Override
                     public void handle(MouseEvent t) {
                         //CREACION DE UN PEDIDO
-                        //Pedido p=new Pedido(menu.getDescripcion(),Usuario.getUsuario(),Integer.parseInt(cantidad.getText()),menu.getPrecio());
+                        //ARREGLAR ERROR DE NOMBRE Y APELLIDO
+//                        Pedido p=new Pedido(menu.getDescripcion(),Usuario.getUsuario(),Integer.parseInt(cantidad.getText()),menu.getPrecio());
 
                     }
 
@@ -158,7 +160,7 @@ public class VentanaPedidoController implements Initializable {
         String opciones = "1234567890";
         String cadena = "";
         Random r = new Random();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 4; i++) {
             int posicion = r.nextInt(opciones.length());
             char caracter = opciones.charAt(posicion);
             cadena += caracter;
@@ -168,7 +170,7 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    public void mostrarPedido() {
+    public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
             @Override
 
@@ -185,6 +187,17 @@ public class VentanaPedidoController implements Initializable {
 
                     gridPedido.getChildren().addAll(lblDescr,lblCant,lblPrecio);
 
+                }
+                for(int j = 0;j<listaPedidos.size();j++){
+                    double suma = listaPedidos.get(j).valorTotal();
+                    total += suma;
+                    
+                  
+                    double subtotalIVA = total + (total*0.14);
+                    lblSubtotal.setText(String.valueOf(total));
+                    lblIva.setText("12%");
+                    lblTotal.setText(String.valueOf(subtotalIVA));
+                   
                 }
             }
 
