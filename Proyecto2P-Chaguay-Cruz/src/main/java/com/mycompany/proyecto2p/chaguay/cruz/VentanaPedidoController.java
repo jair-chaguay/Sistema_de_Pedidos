@@ -148,6 +148,13 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
+    
+    public class ValorInsuficienteException extends Exception{
+        public ValorInsuficienteException(String msg){
+            super(msg);
+        }
+    }
+    
 
     public void mostrarMenu(String tipo) {
         for (int i = 0; i < menulista.size(); i++) {
@@ -157,6 +164,7 @@ public class VentanaPedidoController implements Initializable {
                 Label lblDescrp = new Label(menu.getDescripcion());
                 Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad = new TextField();
+                
 
                 Button btnAgregar = new Button("Agregar");
                 btnAgregar.setOnMouseClicked(new EventHandler<MouseEvent>() {
