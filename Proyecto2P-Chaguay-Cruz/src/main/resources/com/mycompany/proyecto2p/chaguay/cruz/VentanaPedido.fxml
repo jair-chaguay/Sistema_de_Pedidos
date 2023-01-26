@@ -82,7 +82,7 @@
       </HBox>
       <HBox prefHeight="155.0" prefWidth="600.0" spacing="70.0">
          <children>
-            <GridPane alignment="TOP_CENTER" prefHeight="100.0" prefWidth="277.0">
+            <GridPane fx:id="gridOpciones" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="277.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="67.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="55.0" />
