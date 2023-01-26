@@ -54,18 +54,18 @@ public class VentanaPedidoController implements Initializable {
     private Label lblTotal;
 
     @FXML
-    private ComboBox<Menu> cbxmenu;
+    private ComboBox<String> cbxmenu;
 
     @FXML
     private ComboBox<Menu> cbxordenar;
 
     void cargarCombo() throws IOException {
-//        for (Menu menu : mn) {
-//            if (menu.getDescripcion().equals("F")) {
-//
-//            }
-//
-//        }
+        ArrayList<String> tipos= new ArrayList<>();
+        tipos.add("Plato Fuerte");
+        tipos.add("Bebida");
+        tipos.add("Postre");
+        tipos.add("Piqueo");
+        cbxmenu.getItems().setAll(tipos);
     }
 
     @FXML
