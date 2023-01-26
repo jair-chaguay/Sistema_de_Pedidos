@@ -48,10 +48,12 @@ public class VentanaPedidoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         menulista = leerArchivo();
-
-        cbxmenu.getItems().addAll("Platos Fuertes","Bebidas","Postres","Piqueos");
-
-        // TODO
+        try {
+            cargarCombo();
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -101,7 +103,15 @@ public class VentanaPedidoController implements Initializable {
         return menulista;
     }
 
-
+    void cargarCombo() throws IOException{
+        ArrayList<String> tipos= new ArrayList<>();
+        tipos.add("Platos Fuertes");
+        tipos.add("Bebidas");
+        tipos.add("Postres");
+        tipos.add("Piqueos");
+        cbxmenu.getItems().setAll(tipos);
+    
+    }
     @FXML
     void comboEvents(ActionEvent e) {
 
@@ -110,18 +120,23 @@ public class VentanaPedidoController implements Initializable {
         if (opcion.equals("Platos Fuertes")) {
             String tipoPedido = "F";
             mostrarMenu(tipoPedido);
+           
+            
 
         } else if (opcion.equals("Bebidas")) {
             String tipoPedido = "B";
             mostrarMenu(tipoPedido);
+            
 
         } else if (opcion.equals("Postres")) {
             String tipoPedido = "P";
             mostrarMenu(tipoPedido);
+             
 
         } else if (opcion.equals("Piqueos")) {
             String tipoPedido = "Q";
             mostrarMenu(tipoPedido);
+             
 
         }
 
@@ -152,6 +167,7 @@ public class VentanaPedidoController implements Initializable {
                 GridPane.setConstraints(lblPrecio, 1, i + 1);
                 GridPane.setConstraints(cantidad, 2, i + 1);
                 GridPane.setConstraints(btnAgregar, 3, i + 1);
+                gridOpciones.setVgap(10);
 
                 gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
 
