@@ -89,13 +89,6 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private GridPane gridPedido;
-    
-    @FXML
-    private TableView tablaPedido;
-    
-   
-    
-    
 
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
@@ -210,37 +203,19 @@ public class VentanaPedidoController implements Initializable {
 
             @Override
             public void run() {
-//                TableColumn<Pedido,String> colDescripcion=new TableColumn<>("Descripcion");
-//                TableColumn<Pedido,String> colCantidad=new TableColumn<>("Cantidad");
-//                TableColumn<Pedido,String> colValor=new TableColumn<>("Valor");
-//                tablaPedido.getColumns().addAll(colDescripcion,colCantidad,colValor);
-//                
-//                 
-//                 for(Pedido pedido:listaPedidos){
-//                     colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-//                     colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-//                     colValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-//                    tablaPedido.getItems().addAll(pedido);
-//                   }
-//                for (int i = 0; i < listaPedidos.size(); i++) {
-//                    
-//                   
-////                    String descrp=listaPedidos.get(i).getDescripcion();
-////                    String cantidad=String.valueOf(listaPedidos.get(i).getCantidad());
-////                    String valor=String.valueOf(listaPedidos.get(i).valorTotal());
-//                   
-////                    Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
-////                    Label lblCant = new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
-////                    Label lblPrecio = new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
-//                    
-//                    
-////                    GridPane.setConstraints(lblDescr, 0, i + 1);
-////                    GridPane.setConstraints(lblCant, 1, i + 1);
-////                    GridPane.setConstraints(lblPrecio, 2, i + 1);
-////
-////                    gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
-//
-//                }
+                for (int i = 0; i < listaPedidos.size(); i++) {
+
+                    Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
+                    Label lblCant = new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
+                    Label lblPrecio = new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
+
+                    GridPane.setConstraints(lblDescr, 0, i + 1);
+                    GridPane.setConstraints(lblCant, 1, i + 1);
+                    GridPane.setConstraints(lblPrecio, 2, i + 1);
+
+                    gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
+
+                }
 //                for (int j = 0; j < listaPedidos.size(); j++) {
 //                    double suma = listaPedidos.get(j).valorTotal();
 //                    total += suma;

@@ -23,10 +23,10 @@ public class Pedido {
     }
 
 
-    public void setdescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public String getdescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -54,9 +54,7 @@ public class Pedido {
         this.valor = valor;
     }
 
-    public String getDescripcion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
     
     public double valorTotal(){
         double total = this.getCantidad() * this.getValor();
