@@ -5,6 +5,7 @@
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
+import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,10 +31,11 @@ import javafx.stage.Stage;
  */
 public class VentanaPedidoController implements Initializable {
 
-    private ArrayList<Menu> mn;
+    private static ArrayList<Menu> mn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mn=leerArchivo();
 
         try {
             cargarCombo();
@@ -134,6 +136,10 @@ public class VentanaPedidoController implements Initializable {
             
         }
 
+    }
+    
+    public void mostrarPedido(){
+    
     }
 
     @FXML
