@@ -115,12 +115,12 @@
                   </Label>
                </children>
             </GridPane>
-            <TableView prefHeight="155.0" prefWidth="236.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Descripción" />
-                <TableColumn prefWidth="75.0" text="Cantidad" />
+            <TableView fx:id="tablaPedido" prefHeight="155.0" prefWidth="236.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="Descripcion" />
+                  <TableColumn prefWidth="85.0" text="Cantidad" />
                   <TableColumn prefWidth="75.0" text="Valor" />
-              </columns>
+               </columns>
             </TableView>
          </children>
       </HBox>

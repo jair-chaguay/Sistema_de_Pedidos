@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz;
 
+import static com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController.usuariosI;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
@@ -27,7 +28,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -50,7 +54,7 @@ public class VentanaPedidoController implements Initializable {
         menulista = leerArchivo();
         try {
             cargarCombo();
-            
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -85,12 +89,19 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private GridPane gridPedido;
+    
+    @FXML
+    private TableView tablaPedido;
+    
+   
+    
+    
 
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
-        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"Menu.txt",StandardCharsets.UTF_8))) {
+        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Menu.txt", StandardCharsets.UTF_8))) {
             String linea;
- 
+
             while ((linea = bfr.readLine()) != null) {
                 String[] lineas = linea.split(",");
                 Menu menu = new Menu(lineas[0], Double.parseDouble(lineas[1]), lineas[2]);
@@ -103,40 +114,40 @@ public class VentanaPedidoController implements Initializable {
         return menulista;
     }
 
-    void cargarCombo() throws IOException{
-        ArrayList<String> tipos= new ArrayList<>();
+    void cargarCombo() throws IOException {
+        ArrayList<String> tipos = new ArrayList<>();
         tipos.add("Platos Fuertes");
         tipos.add("Bebidas");
         tipos.add("Postres");
         tipos.add("Piqueos");
         cbxmenu.getItems().setAll(tipos);
-    
+
     }
+
     @FXML
     void comboEvents(ActionEvent e) {
 
         String opcion = cbxmenu.getValue();
 
         if (opcion.equals("Platos Fuertes")) {
+            gridOpciones.getChildren().clear();
             String tipoPedido = "F";
             mostrarMenu(tipoPedido);
-           
-            
 
         } else if (opcion.equals("Bebidas")) {
+            gridOpciones.getChildren().clear();
             String tipoPedido = "B";
             mostrarMenu(tipoPedido);
-            
 
         } else if (opcion.equals("Postres")) {
+            gridOpciones.getChildren().clear();
             String tipoPedido = "P";
             mostrarMenu(tipoPedido);
-             
 
         } else if (opcion.equals("Piqueos")) {
+            gridOpciones.getChildren().clear();
             String tipoPedido = "Q";
             mostrarMenu(tipoPedido);
-             
 
         }
 
@@ -156,8 +167,10 @@ public class VentanaPedidoController implements Initializable {
                     @Override
                     public void handle(MouseEvent t) {
                         //CREACION DE UN PEDIDO
-                        //ARREGLAR ERROR DE NOMBRE Y APELLIDO
-//                        Pedido p=new Pedido(menu.getDescripcion(),Usuario.getUsuario(),Integer.parseInt(cantidad.getText()),menu.getPrecio());
+
+                        Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
+                        listaPedidos.add(p);
+                        mostrarEscogidos();
 
                     }
 
@@ -167,7 +180,7 @@ public class VentanaPedidoController implements Initializable {
                 GridPane.setConstraints(lblPrecio, 1, i + 1);
                 GridPane.setConstraints(cantidad, 2, i + 1);
                 GridPane.setConstraints(btnAgregar, 3, i + 1);
-                gridOpciones.setVgap(10);
+                gridOpciones.setVgap(10); //ESPACIADO ENTRE LINEAS
 
                 gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
 
@@ -194,31 +207,50 @@ public class VentanaPedidoController implements Initializable {
 
     public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
+
             @Override
-
             public void run() {
-                for (int i = 0; i < listaPedidos.size(); i++) {
-                    Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
-                    Label lblCant = new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
-                    Label lblPrecio = new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
-
-                    GridPane.setConstraints(lblDescr, 0, i + 1);
-                    GridPane.setConstraints(lblCant, 1, i + 1);
-                    GridPane.setConstraints(lblPrecio, 2, i + 1);
-
-                    gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
-
-                }
-                for (int j = 0; j < listaPedidos.size(); j++) {
-                    double suma = listaPedidos.get(j).valorTotal();
-                    total += suma;
-
-                    double subtotalIVA = total + (total * 0.14);
-                    lblSubtotal.setText(String.valueOf(total));
-                    lblIva.setText("12%");
-                    lblTotal.setText(String.valueOf(subtotalIVA));
-
-                }
+//                TableColumn<Pedido,String> colDescripcion=new TableColumn<>("Descripcion");
+//                TableColumn<Pedido,String> colCantidad=new TableColumn<>("Cantidad");
+//                TableColumn<Pedido,String> colValor=new TableColumn<>("Valor");
+//                tablaPedido.getColumns().addAll(colDescripcion,colCantidad,colValor);
+//                
+//                 
+//                 for(Pedido pedido:listaPedidos){
+//                     colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+//                     colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+//                     colValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+//                    tablaPedido.getItems().addAll(pedido);
+//                   }
+//                for (int i = 0; i < listaPedidos.size(); i++) {
+//                    
+//                   
+////                    String descrp=listaPedidos.get(i).getDescripcion();
+////                    String cantidad=String.valueOf(listaPedidos.get(i).getCantidad());
+////                    String valor=String.valueOf(listaPedidos.get(i).valorTotal());
+//                   
+////                    Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
+////                    Label lblCant = new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
+////                    Label lblPrecio = new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
+//                    
+//                    
+////                    GridPane.setConstraints(lblDescr, 0, i + 1);
+////                    GridPane.setConstraints(lblCant, 1, i + 1);
+////                    GridPane.setConstraints(lblPrecio, 2, i + 1);
+////
+////                    gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
+//
+//                }
+//                for (int j = 0; j < listaPedidos.size(); j++) {
+//                    double suma = listaPedidos.get(j).valorTotal();
+//                    total += suma;
+//
+//                    double subtotalIVA = total + (total * 0.14);
+//                    lblSubtotal.setText(String.valueOf(total));
+//                    lblIva.setText("12%");
+//                    lblTotal.setText(String.valueOf(subtotalIVA));
+//
+//                }
             }
 
         });
