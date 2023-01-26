@@ -71,7 +71,7 @@ public class VentanaOpcionesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
             Parent root= loader.load();
-            Scene scene=new Scene(root, 640,513);
+            Scene scene=new Scene(root, 713,524);
             Stage stage=new Stage();
             stage.setScene(scene);
             stage.setResizable(false);

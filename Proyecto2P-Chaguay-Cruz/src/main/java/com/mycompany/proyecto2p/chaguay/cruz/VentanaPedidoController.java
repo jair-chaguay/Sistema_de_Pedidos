@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -39,22 +40,17 @@ import javafx.stage.Stage;
  */
 public class VentanaPedidoController implements Initializable {
 
-    private static ArrayList<Menu> mn = new ArrayList<>();
-    private static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    static ArrayList<Menu> menulista = new ArrayList<>();
+    static ArrayList<Pedido> listaPedidos = new ArrayList<>();
     double total;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-     
-            mn = leerArchivo();
-            
-            try{
-                cargarCombo();
-            }catch(IOException e){
-                
-            }
-           
+        menulista = leerArchivo();
+
+        cbxmenu.getItems().addAll("Platos Fuertes","Bebidas","Postres","Piqueos");
+
         // TODO
     }
 
@@ -80,81 +76,62 @@ public class VentanaPedidoController implements Initializable {
     private ComboBox<String> cbxmenu;
 
     @FXML
-    private ComboBox<Menu> cbxordenar;
+    private ComboBox<String> cbxordenar;
 
     @FXML
     private GridPane gridOpciones;
 
     @FXML
     private GridPane gridPedido;
-    
-    
-    
+
     public ArrayList<Menu> leerArchivo() {
-        ArrayList<Menu> menu = new ArrayList<>();
-        try ( BufferedReader bfr = new BufferedReader(new FileReader("Menu.txt"))) {            
+        ArrayList<Menu> menulista = new ArrayList<>();
+        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles+"Menu.txt",StandardCharsets.UTF_8))) {
             String linea;
-            linea=bfr.readLine();
-            Menu m;
-            while((linea=bfr.readLine())!=null){
-                String[] lineas=linea.trim().split(",");
-                Menu mn= new Menu(lineas[0],Double.parseDouble(lineas[1]),lineas[2]);
-                menu.add(mn);                        
-            }               
+ 
+            while ((linea = bfr.readLine()) != null) {
+                String[] lineas = linea.split(",");
+                Menu menu = new Menu(lineas[0], Double.parseDouble(lineas[1]), lineas[2]);
+                menulista.add(menu);
+            }
         } catch (IOException ex) {
             ex.getMessage();
             return null;
         }
-        return menu;
+        return menulista;
     }
 
-    
-
-    
-    void cargarCombo() throws IOException {
-        ArrayList<String> tipos = new ArrayList<>();
-        tipos.add("PlatoFuerte");
-        tipos.add("Bebida");
-        tipos.add("Postre");
-        tipos.add("Piqueo");
-        cbxmenu.getItems().setAll(tipos);
-    }
 
     @FXML
     void comboEvents(ActionEvent e) {
 
         String opcion = cbxmenu.getValue();
-        tipoAlimento tipo;
-        switch (opcion) {
 
-            case "PlatoFuerte":
-                 tipo = tipoAlimento.valueOf("F");
-                mostrarMenu(tipo);
-                break;
-            case "Bebida":
-                 tipo = tipoAlimento.valueOf("B");
+        if (opcion.equals("Platos Fuertes")) {
+            String tipoPedido = "F";
+            mostrarMenu(tipoPedido);
 
-                mostrarMenu(tipo);
-                break;
-            case "Postre":
-                 tipo =tipoAlimento.valueOf("P");
-                mostrarMenu(tipo);
-                break;
-            case "Piqueo":
-                 tipo = tipoAlimento.valueOf("Q");
-                mostrarMenu(tipo);
-                break;
-            default:
-                break;
+        } else if (opcion.equals("Bebidas")) {
+            String tipoPedido = "B";
+            mostrarMenu(tipoPedido);
+
+        } else if (opcion.equals("Postres")) {
+            String tipoPedido = "P";
+            mostrarMenu(tipoPedido);
+
+        } else if (opcion.equals("Piqueos")) {
+            String tipoPedido = "Q";
+            mostrarMenu(tipoPedido);
+
         }
 
     }
 
-    public void mostrarMenu(tipoAlimento tipo) {
-        for (int i = 0; i < mn.size(); i++) {
-            Menu menu = mn.get(i);
+    public void mostrarMenu(String tipo) {
+        for (int i = 0; i < menulista.size(); i++) {
+            Menu menu = menulista.get(i);
 
-            if (menu.getTipo().equals(tipo)) {
+            if (menulista.get(i).getTipo().equals(tipo)) {
                 Label lblDescrp = new Label(menu.getDescripcion());
                 Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad = new TextField();
@@ -205,33 +182,31 @@ public class VentanaPedidoController implements Initializable {
 
             public void run() {
                 for (int i = 0; i < listaPedidos.size(); i++) {
-                    Label lblDescr= new Label(listaPedidos.get(i).getDescripcion());
-                    Label lblCant= new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
-                    Label lblPrecio= new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
-                    
-                    
-                    GridPane.setConstraints(lblDescr,0,i+1);
-                    GridPane.setConstraints(lblCant,1,i+1);
-                    GridPane.setConstraints(lblPrecio,2,i+1);
+                    Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
+                    Label lblCant = new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
+                    Label lblPrecio = new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
 
-                    gridPedido.getChildren().addAll(lblDescr,lblCant,lblPrecio);
+                    GridPane.setConstraints(lblDescr, 0, i + 1);
+                    GridPane.setConstraints(lblCant, 1, i + 1);
+                    GridPane.setConstraints(lblPrecio, 2, i + 1);
+
+                    gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
 
                 }
-                for(int j = 0;j<listaPedidos.size();j++){
+                for (int j = 0; j < listaPedidos.size(); j++) {
                     double suma = listaPedidos.get(j).valorTotal();
                     total += suma;
-                    
-                  
-                    double subtotalIVA = total + (total*0.14);
+
+                    double subtotalIVA = total + (total * 0.14);
                     lblSubtotal.setText(String.valueOf(total));
                     lblIva.setText("12%");
                     lblTotal.setText(String.valueOf(subtotalIVA));
-                   
+
                 }
             }
 
         });
-    
+
     }
 
     @FXML
@@ -263,13 +238,10 @@ public class VentanaPedidoController implements Initializable {
         listaPedidos.clear();
 
     }
-    
-     @FXML
-    public void ordenarPor(ActionEvent ae){
-        
+
+    @FXML
+    public void ordenarPor(ActionEvent ae) {
+
     }
-    
-    
-   
 
 }

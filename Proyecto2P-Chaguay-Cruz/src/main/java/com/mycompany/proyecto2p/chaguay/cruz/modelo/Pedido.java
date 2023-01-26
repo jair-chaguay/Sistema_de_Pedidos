@@ -9,33 +9,25 @@ package com.mycompany.proyecto2p.chaguay.cruz.modelo;
  * @author mcruz
  */
 public class Pedido {
-    private int idPedido;
+    
     private String descripcion;
     private int cantidad; //cantidad de comida escogida
     private String nombreCliente;
     private double valor;
 
-    public Pedido(int idPedido, String descripcion,int cantidad, String nombreCliente, double valor) {
-        this.idPedido = idPedido;
+    public Pedido( String descripcion,int cantidad, String nombreCliente, double valor) {
         this.descripcion=descripcion;
         this.cantidad = cantidad;
         this.nombreCliente = nombreCliente;
         this.valor = valor;
     }
 
-    public int getIdPedido() {
-        return idPedido;
-    }
 
     public void setdescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     public String getdescripcion() {
         return descripcion;
-    }
-
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
     }
 
     public int getCantidad() {
