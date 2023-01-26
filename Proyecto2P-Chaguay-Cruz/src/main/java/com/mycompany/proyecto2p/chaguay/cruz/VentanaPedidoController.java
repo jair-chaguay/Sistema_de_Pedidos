@@ -14,8 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.VBox;
 
 /**
@@ -63,12 +62,7 @@ public class VentanaPedidoController implements Initializable {
     private ComboBox<Menu> cbxordenar;
 
     void cargarCombo() throws IOException {
-        for (Menu menu : mn) {
-            if (menu.getDescripcion().equals("F")) {
-
-            }
-
-        }
+        
     }
 
 }
