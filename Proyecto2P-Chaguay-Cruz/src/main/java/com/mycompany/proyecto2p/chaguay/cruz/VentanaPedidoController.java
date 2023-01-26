@@ -31,7 +31,7 @@ public class VentanaPedidoController implements Initializable {
     private ArrayList<Menu> mn;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
@@ -60,34 +60,42 @@ public class VentanaPedidoController implements Initializable {
     private ComboBox<Menu> cbxordenar;
 
     void cargarCombo() throws IOException {
-        for (Menu menu : mn) {
-            if (menu.getDescripcion().equals("F")) {
-                
+//        for (Menu menu : mn) {
+//            if (menu.getDescripcion().equals("F")) {
+//
+//            }
+//
+//        }
+    }
 
-            }
+    @FXML
+    void contPago(ActionEvent e) throws IOException {
+        mostrarVentana(e);
 
+    }
+
+    void mostrarVentana(ActionEvent ae) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
+        try {
+            Parent root = loader.load();
+
+            VentanaPagoController controlador = loader.getController();
+            Scene scene = new Scene(root, 640, 500);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            stage.setOnCloseRequest(e -> controlador.closeWindows());
+            Stage myStage = (Stage) this.btnContinuar.getScene().getWindow();
+            myStage.close();
+        } catch (IOException ex) {
+            ex.getMessage();
         }
     }
+
     
-    @FXML
-    void contPago(ActionEvent e)throws IOException{
-        mostrarVentana(e);
-        
-    }
-    
-    void mostrarVentana(ActionEvent ae)throws IOException{
-        FXMLLoader fxml=new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
-        Parent root=fxml.load();
-        Scene scene=new Scene(root, 640,520);
-            Stage stage=new Stage();
-            stage.setScene(scene);            
-            stage.show();
-        
-        
-    }
-    
-    @FXML 
-    void limpiar(ActionEvent ea){
+
+        @FXML 
+        void limpiar(ActionEvent ev){
         
     }
     
