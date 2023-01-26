@@ -31,14 +31,7 @@ public class VentanaPedidoController implements Initializable {
     private ArrayList<Menu> mn;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-            mn = Menu.leerArchivo();
-            cargarCombo();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-
-        }
+    public void initialize(URL url, ResourceBundle rb) {        
         // TODO
     }
 
