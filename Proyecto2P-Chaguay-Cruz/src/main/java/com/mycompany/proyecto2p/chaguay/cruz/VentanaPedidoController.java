@@ -87,18 +87,24 @@ public class VentanaPedidoController implements Initializable {
         Object evt = e.getSource();
         if (evt.equals(cbxmenu)) {
             String opcion= cbxmenu.getValue();
-            if(opcion.equals("Plato Fuerte")){
-                mostrarMenu("F");
-            
-            
-            }else if(opcion.equals("PlatoFuerte")){
-                mostrarMenu("F");
-            }else if(opcion.equals("Bebida")){
-                mostrarMenu("B");
-            }else if(opcion.equals("Postre")){
-                mostrarMenu("P");
-            }else if(opcion.equals("Piqueo")){
-                mostrarMenu("Q");
+            switch (opcion) {
+                case "Plato Fuerte":
+                    mostrarMenu("F");
+                    break;
+                case "PlatoFuerte":
+                    mostrarMenu("F");
+                    break;
+                case "Bebida":
+                    mostrarMenu("B");
+                    break;
+                case "Postre":
+                    mostrarMenu("P");
+                    break;
+                case "Piqueo":
+                    mostrarMenu("Q");
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -112,6 +118,8 @@ public class VentanaPedidoController implements Initializable {
                 Label lblDescrp= new Label(menu.getDescripcion());
                 Label lblPrecio= new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad=new TextField();
+                
+                
                 Button btnAgregar= new Button("Agregar");
                 
                 GridPane.setConstraints(lblDescrp,0,i+1);
