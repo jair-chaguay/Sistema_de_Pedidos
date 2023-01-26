@@ -101,6 +101,7 @@ public class VentanaSistemaController implements Initializable {
 
     }
 
+    
     void VistaOpciones(ActionEvent ae) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
         Parent root = loader.load();
