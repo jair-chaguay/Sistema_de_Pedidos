@@ -151,7 +151,7 @@ public class VentanaPedidoController implements Initializable {
     
     public class ValorInsuficienteException extends Exception{
         public ValorInsuficienteException(String msg){
-            super(msg);
+            super("Ingresar una cantidad valida");
         }
     }
     
