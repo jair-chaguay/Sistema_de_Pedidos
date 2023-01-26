@@ -8,6 +8,7 @@ import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
 //import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -98,24 +99,25 @@ public class VentanaPedidoController implements Initializable {
     void comboEvents(ActionEvent e) {
 
         String opcion = cbxmenu.getValue();
+        tipoAlimento tipo;
         switch (opcion) {
 
             case "PlatoFuerte":
-                String tipo1 = "F";
-                mostrarMenu(tipo1);
+                 tipo = tipoAlimento.valueOf("F");
+                mostrarMenu(tipo);
                 break;
             case "Bebida":
-                String tipo2 = "B";
+                 tipo = tipoAlimento.valueOf("B");
 
-                mostrarMenu(tipo2);
+                mostrarMenu(tipo);
                 break;
             case "Postre":
-                String tipo3 = "P";
-                mostrarMenu(tipo3);
+                 tipo =tipoAlimento.valueOf("P");
+                mostrarMenu(tipo);
                 break;
             case "Piqueo":
-                String tipo4 = "Q";
-                mostrarMenu(tipo4);
+                 tipo = tipoAlimento.valueOf("Q");
+                mostrarMenu(tipo);
                 break;
             default:
                 break;
@@ -123,7 +125,7 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    public void mostrarMenu(String tipo) {
+    public void mostrarMenu(tipoAlimento tipo) {
         for (int i = 0; i < mn.size(); i++) {
             Menu menu = mn.get(i);
 
