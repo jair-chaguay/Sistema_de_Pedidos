@@ -35,10 +35,12 @@ public class VentanaPedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        mn=leerArchivo();
+        
 
         try {
+            mn=leerArchivo();
             cargarCombo();
+            
 
         } catch (IOException | RuntimeException e) {
         }
