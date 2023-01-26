@@ -84,57 +84,56 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     void comboEvents(ActionEvent e) {
-        Object evt = e.getSource();
-        if (evt.equals(cbxmenu)) {
-            String opcion= cbxmenu.getValue();
-            switch (opcion) {
-                case "Plato Fuerte":
-                    mostrarMenu("F");
-                    break;
-                case "PlatoFuerte":
-                    mostrarMenu("F");
-                    break;
-                case "Bebida":
-                    mostrarMenu("B");
-                    break;
-                case "Postre":
-                    mostrarMenu("P");
-                    break;
-                case "Piqueo":
-                    mostrarMenu("Q");
-                    break;
-                default:
-                    break;
-            }
 
-        }
-
-    }
-    
-    public void mostrarMenu(String tipo){
-        for(int i=0;i<mn.size();i++){
-        for(Menu menu: mn){
-            if(menu.getTipo().equals(tipo)){
-                Label lblDescrp= new Label(menu.getDescripcion());
-                Label lblPrecio= new Label(String.valueOf(menu.getPrecio()));
-                TextField cantidad=new TextField();
-                
-                
-                Button btnAgregar= new Button("Agregar");
-                
-                GridPane.setConstraints(lblDescrp,0,i+1);
-                GridPane.setConstraints(lblPrecio,1,i+1);
-                GridPane.setConstraints(cantidad,2,i+1);
-                GridPane.setConstraints(btnAgregar,3,i+1);
-                
-                gridOpciones.getChildren().addAll(lblDescrp,lblPrecio,cantidad,btnAgregar);
+        String opcion = cbxmenu.getValue();
+        switch (opcion) {
             
-            }
-        
+            case "PlatoFuerte":
+                String tipo1= "F";
+                mostrarMenu(tipo1);
+                break;
+            case "Bebida":
+                String tipo2= "B";
+                
+                mostrarMenu(tipo2);
+                break;
+            case "Postre":
+                String tipo3= "P";
+                mostrarMenu(tipo3);
+                break;
+            case "Piqueo":
+                String tipo4= "Q";
+                mostrarMenu(tipo4);
+                break;
+            default:
+                break;
         }
+
     }
-    
-    
+
+    public void mostrarMenu(String tipo) {
+        for (int i = 0; i < mn.size(); i++) {
+            Menu menu=mn.get(i);
+            
+                if (menu.getTipo().equals(tipo)) {
+                    Label lblDescrp = new Label(menu.getDescripcion());
+                    Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
+                    TextField cantidad = new TextField();
+
+                    Button btnAgregar = new Button("Agregar");
+
+                    GridPane.setConstraints(lblDescrp, 0, i + 1);
+                    GridPane.setConstraints(lblPrecio, 1, i + 1);
+                    GridPane.setConstraints(cantidad, 2, i + 1);
+                    GridPane.setConstraints(btnAgregar, 3, i + 1);
+
+                    gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
+
+                }
+
+            
+        }
+
     }
 
     @FXML
