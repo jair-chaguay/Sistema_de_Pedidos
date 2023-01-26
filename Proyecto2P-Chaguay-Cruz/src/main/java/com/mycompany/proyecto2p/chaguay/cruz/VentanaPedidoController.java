@@ -112,6 +112,8 @@ public class VentanaPedidoController implements Initializable {
                 Label lblPrecio= new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad=new TextField();
                 Button btnAgregar= new Button("Agregar");
+                
+                gridOpciones.getChildren().addAll(lblDescrp,lblPrecio,cantidad,btnAgregar);
             
             }
         
