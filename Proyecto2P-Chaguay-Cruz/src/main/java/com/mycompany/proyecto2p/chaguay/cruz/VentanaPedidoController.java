@@ -9,13 +9,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -70,5 +75,29 @@ public class VentanaPedidoController implements Initializable {
 
         }
     }
+    
+    @FXML
+    void contPago(ActionEvent e)throws IOException{
+        mostrarVentana(e);
+        
+    }
+    
+    void mostrarVentana(ActionEvent ae)throws IOException{
+        FXMLLoader fxml=new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
+        Parent root=fxml.load();
+        Scene scene=new Scene(root, 640,520);
+            Stage stage=new Stage();
+            stage.setScene(scene);            
+            stage.show();
+        
+        
+    }
+    
+    @FXML 
+    void limpiar(ActionEvent ea){
+        
+    }
+    
+    
 
 }
