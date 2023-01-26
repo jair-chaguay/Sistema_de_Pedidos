@@ -74,6 +74,21 @@ public class VentanaPedidoController implements Initializable {
         tipos.add("Piqueo");
         cbxmenu.getItems().setAll(tipos);
     }
+    
+    @FXML
+    void comboEvents(ActionEvent e){
+        Object evt= e.getSource();
+        if(evt.equals(cbxmenu)){
+            
+        
+        }
+        
+       
+        
+        
+    
+    
+    }
 
     @FXML
     void contPago(ActionEvent e) throws IOException {
