@@ -4,17 +4,16 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz.modelo;
 
-/**
- *
- * @author HP
- */
+
 public class Usuario {
     String usuario;
     String password;
+    String NameApellido;
     
-    public Usuario(String usuario, String password){
+    public Usuario(String usuario, String password,String NameApellido){
         this.usuario=usuario;
         this.password=password;
+        this.NameApellido=NameApellido;
     }
 
     public String getUsuario() {
@@ -29,14 +28,24 @@ public class Usuario {
         return password;
     }
     
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getNameApellido(){
+        return NameApellido;
+    }
+    
+    public void setNameApellido(String NameApellido){
+        this.NameApellido=NameApellido;
+    }
+    
     @Override
     public String toString(){
         return "usuario: " + usuario + "password" + password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    
     
     
 }

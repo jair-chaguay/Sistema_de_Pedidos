@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz;
 
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -70,7 +71,7 @@ public class VentanaOpcionesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
             Parent root= loader.load();
-            Scene scene=new Scene(root, 640,480);
+            Scene scene=new Scene(root, 640,513);
             Stage stage=new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -102,8 +103,8 @@ public class VentanaOpcionesController implements Initializable {
         
     }
     
-    void init(String txt){
-        LblUsuario.setText("Bienvenid@ " +txt);
+    void init(Usuario txt){
+        LblUsuario.setText("Bienvenid@ " +txt.getNameApellido());
         
     }
     

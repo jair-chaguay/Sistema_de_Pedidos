@@ -40,6 +40,9 @@ import javafx.stage.Stage;
  * @author HP
  */
 public class VentanaSistemaController implements Initializable {
+    
+    public static ArrayList<Usuario> users = new ArrayList<>();
+    public static Usuario usuariosI;
 
     /**
      * Initializes the controller class.
@@ -101,7 +104,6 @@ public class VentanaSistemaController implements Initializable {
 
     }
 
-    
     void VistaOpciones(ActionEvent ae) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
         Parent root = loader.load();
@@ -111,7 +113,7 @@ public class VentanaSistemaController implements Initializable {
         stage.setScene(scene);
       
         stage.show();
-        controlador.init(txtUsuario.getText());
+        controlador.init(usuariosI);
         stage.setOnCloseRequest(e -> controlador.closeWindows());
         
     }
@@ -122,17 +124,22 @@ public class VentanaSistemaController implements Initializable {
         try ( BufferedReader br = new BufferedReader(new FileReader(Principal.pathFiles+"Usuarios.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] pr = linea.split(";");
-                parametros.add(pr);
+                String[] datos = linea.split(";");
+                
+                String user=datos[0];
+                String cont=datos[1];
+                String nameAp=datos[2];
+                
+                Usuario us=new Usuario(user,cont,nameAp);
+                users.add(us);
             }
         } catch (IOException ioe) {
             System.out.println("Ha ocurrido un error!");
 
         }
-        for (String[] s : parametros) {
-            String u = s[0];
-            String c = s[1];
-            if (usuario.equals(u) && contrasena.equals(c)) {
+        for (Usuario s: users) {            
+            if (s.getUsuario().equals(usuario)&& s.getPassword().equals(contrasena)) {
+                usuariosI=s;        
                 return true;
             } 
         }
