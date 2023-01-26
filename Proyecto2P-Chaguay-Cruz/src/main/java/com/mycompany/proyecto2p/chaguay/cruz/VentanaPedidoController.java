@@ -124,16 +124,19 @@ public class VentanaPedidoController implements Initializable {
 
         if (opcion.equals("Platos Fuertes")) {
             gridOpciones.getChildren().clear();
+            
             String tipoPedido = "F";
             mostrarMenu(tipoPedido);
 
         } else if (opcion.equals("Bebidas")) {
             gridOpciones.getChildren().clear();
+           
             String tipoPedido = "B";
             mostrarMenu(tipoPedido);
 
         } else if (opcion.equals("Postres")) {
             gridOpciones.getChildren().clear();
+            
             String tipoPedido = "P";
             mostrarMenu(tipoPedido);
 
@@ -173,8 +176,7 @@ public class VentanaPedidoController implements Initializable {
                 GridPane.setConstraints(lblPrecio, 1, i + 1);
                 GridPane.setConstraints(cantidad, 2, i + 1);
                 GridPane.setConstraints(btnAgregar, 3, i + 1);
-                gridOpciones.setVgap(10); //ESPACIADO ENTRE LINEAS
-
+                gridOpciones.setVgap(10); //ESPACIADO ENTRE LINEAS           
                 gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
 
             }
@@ -216,16 +218,16 @@ public class VentanaPedidoController implements Initializable {
                     gridPedido.getChildren().addAll(lblDescr, lblCant, lblPrecio);
 
                 }
-//                for (int j = 0; j < listaPedidos.size(); j++) {
-//                    double suma = listaPedidos.get(j).valorTotal();
-//                    total += suma;
-//
-//                    double subtotalIVA = total + (total * 0.14);
-//                    lblSubtotal.setText(String.valueOf(total));
-//                    lblIva.setText("12%");
-//                    lblTotal.setText(String.valueOf(subtotalIVA));
-//
-//                }
+                for (int j = 0; j < listaPedidos.size(); j++) {
+                    double suma = listaPedidos.get(j).valorTotal();
+                    total += suma;
+
+                    double subtotalIVA = total + (total * 0.14);
+                    lblSubtotal.setText(String.valueOf(total));
+                    lblIva.setText("12%");
+                    lblTotal.setText(String.valueOf(subtotalIVA));
+
+                }
             }
 
         });
