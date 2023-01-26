@@ -6,11 +6,16 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
 import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
@@ -31,16 +37,15 @@ import javafx.stage.Stage;
  */
 public class VentanaPedidoController implements Initializable {
 
-    private static ArrayList<Menu> mn;
+    private static ArrayList<Menu> mn = new ArrayList<>();
+    private static ArrayList<Pedido> listaPedidos = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
 
         try {
-            mn=leerArchivo();
+            mn = leerArchivo();
             cargarCombo();
-            
 
         } catch (IOException | RuntimeException e) {
         }
@@ -91,22 +96,22 @@ public class VentanaPedidoController implements Initializable {
 
         String opcion = cbxmenu.getValue();
         switch (opcion) {
-            
+
             case "PlatoFuerte":
-                String tipo1= "F";
+                String tipo1 = "F";
                 mostrarMenu(tipo1);
                 break;
             case "Bebida":
-                String tipo2= "B";
-                
+                String tipo2 = "B";
+
                 mostrarMenu(tipo2);
                 break;
             case "Postre":
-                String tipo3= "P";
+                String tipo3 = "P";
                 mostrarMenu(tipo3);
                 break;
             case "Piqueo":
-                String tipo4= "Q";
+                String tipo4 = "Q";
                 mostrarMenu(tipo4);
                 break;
             default:
@@ -117,30 +122,63 @@ public class VentanaPedidoController implements Initializable {
 
     public void mostrarMenu(String tipo) {
         for (int i = 0; i < mn.size(); i++) {
-            Menu menu=mn.get(i);
-            
-                if (menu.getTipo().equals(tipo)) {
-                    Label lblDescrp = new Label(menu.getDescripcion());
-                    Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
-                    TextField cantidad = new TextField();
+            Menu menu = mn.get(i);
 
-                    Button btnAgregar = new Button("Agregar");
+            if (menu.getTipo().equals(tipo)) {
+                Label lblDescrp = new Label(menu.getDescripcion());
+                Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
+                TextField cantidad = new TextField();
 
-                    GridPane.setConstraints(lblDescrp, 0, i + 1);
-                    GridPane.setConstraints(lblPrecio, 1, i + 1);
-                    GridPane.setConstraints(cantidad, 2, i + 1);
-                    GridPane.setConstraints(btnAgregar, 3, i + 1);
+                Button btnAgregar = new Button("Agregar");
+                btnAgregar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        //CREACION DE UN PEDIDO
+                        //Pedido p=new Pedido(menu.getDescripcion(),Usuario.getUsuario(),Integer.parseInt(cantidad.getText()),menu.getPrecio());
 
-                    gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
+                    }
 
-                }
+                });
 
-            
+                GridPane.setConstraints(lblDescrp, 0, i + 1);
+                GridPane.setConstraints(lblPrecio, 1, i + 1);
+                GridPane.setConstraints(cantidad, 2, i + 1);
+                GridPane.setConstraints(btnAgregar, 3, i + 1);
+
+                gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
+
+            }
+
         }
 
     }
-    
-    public void mostrarPedido(){
+    //METODO PARA CREAR ID PEDIDO
+
+    public int crearCodigo() {
+        String opciones = "1234567890";
+        String cadena = "";
+        Random r = new Random();
+        for (int i = 0; i < 6; i++) {
+            int posicion = r.nextInt(opciones.length());
+            char caracter = opciones.charAt(posicion);
+            cadena += caracter;
+        }
+        int valor = Integer.parseInt(cadena);
+        return valor;
+
+    }
+
+    public void mostrarPedido() {
+        Platform.runLater(new Runnable() {
+            @Override
+
+            public void run() {
+                for (int i = 0; i < listaPedidos.size(); i++) {
+
+                }
+            }
+
+        });
     
     }
 
