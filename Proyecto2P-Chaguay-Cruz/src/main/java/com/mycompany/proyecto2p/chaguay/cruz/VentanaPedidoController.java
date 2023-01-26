@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,12 +34,11 @@ public class VentanaPedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        try{
+
+        try {
             cargarCombo();
-        
-        
-        }catch(IOException | RuntimeException e){
+
+        } catch (IOException | RuntimeException e) {
         }
         // TODO
     }
@@ -66,26 +67,55 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     private ComboBox<Menu> cbxordenar;
 
+    @FXML
+    private GridPane gridOpciones;
+
+    @FXML
+    private GridPane gridPedido;
+
     void cargarCombo() throws IOException {
-        ArrayList<String> tipos= new ArrayList<>();
-        tipos.add("Plato Fuerte");
+        ArrayList<String> tipos = new ArrayList<>();
+        tipos.add("PlatoFuerte");
         tipos.add("Bebida");
         tipos.add("Postre");
         tipos.add("Piqueo");
         cbxmenu.getItems().setAll(tipos);
     }
-    
+
     @FXML
-    void comboEvents(ActionEvent e){
-        Object evt= e.getSource();
-        if(evt.equals(cbxmenu)){
+    void comboEvents(ActionEvent e) {
+        Object evt = e.getSource();
+        if (evt.equals(cbxmenu)) {
+            String opcion= cbxmenu.getValue();
+            if(opcion.equals("Plato Fuerte")){
+                mostrarMenu("F");
             
+            
+            }else if(opcion.equals("PlatoFuerte")){
+                mostrarMenu("F");
+            }else if(opcion.equals("Bebida")){
+                mostrarMenu("B");
+            }else if(opcion.equals("Postre")){
+                mostrarMenu("P");
+            }else if(opcion.equals("Piqueo")){
+                mostrarMenu("Q");
+            }
+
+        }
+
+    }
+    
+    public void mostrarMenu(String tipo){
+        for(Menu menu: mn){
+            if(menu.getTipo().equals(tipo)){
+                Label lblDescrp= new Label(menu.getDescripcion());
+                Label lblPrecio= new Label(String.valueOf(menu.getPrecio()));
+                TextField cantidad=new TextField();
+                Button btnAgregar= new Button("Agregar");
+            
+            }
         
         }
-        
-       
-        
-        
     
     
     }
@@ -114,13 +144,9 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
-    
+    @FXML
+    void limpiar(ActionEvent ev) {
 
-        @FXML 
-        void limpiar(ActionEvent ev){
-        
     }
-    
-    
 
 }
