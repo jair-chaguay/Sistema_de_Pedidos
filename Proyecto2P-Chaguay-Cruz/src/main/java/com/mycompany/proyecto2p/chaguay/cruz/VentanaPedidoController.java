@@ -106,6 +106,7 @@ public class VentanaPedidoController implements Initializable {
     }
     
     public void mostrarMenu(String tipo){
+        for(int i=0;i<mn.size();i++){
         for(Menu menu: mn){
             if(menu.getTipo().equals(tipo)){
                 Label lblDescrp= new Label(menu.getDescripcion());
@@ -113,11 +114,17 @@ public class VentanaPedidoController implements Initializable {
                 TextField cantidad=new TextField();
                 Button btnAgregar= new Button("Agregar");
                 
+                GridPane.setConstraints(lblDescrp,0,i+1);
+                GridPane.setConstraints(lblPrecio,1,i+1);
+                GridPane.setConstraints(cantidad,2,i+1);
+                GridPane.setConstraints(btnAgregar,3,i+1);
+                
                 gridOpciones.getChildren().addAll(lblDescrp,lblPrecio,cantidad,btnAgregar);
             
             }
         
         }
+    }
     
     
     }
