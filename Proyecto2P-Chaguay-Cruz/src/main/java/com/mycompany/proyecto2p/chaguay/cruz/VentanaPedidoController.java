@@ -5,9 +5,11 @@
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
-import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
+//import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -231,6 +233,34 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     void limpiar(ActionEvent ev) {
+        listaPedidos.clear();
+
+    }
+    
+     @FXML
+    public void ordenarPor(ActionEvent ae){
+        
+    }
+    
+    
+    public static ArrayList<Menu> leerArchivo() {
+        try ( BufferedReader bfr = new BufferedReader(new FileReader("Menu.txt"))) {
+            ArrayList<Menu> menu = new ArrayList<>();
+            String linea;
+            Menu m;
+            while((linea=bfr.readLine())!=null){
+                String[] lineas=linea.trim().strip().split(",");
+                Menu mn= new Menu(lineas[0],Double.parseDouble(lineas[1]),lineas[2]);
+                menu.add(mn);
+            
+            
+            }
+            return menu;
+
+        } catch (IOException ex) {
+            ex.getMessage();
+            return null;
+        }
 
     }
 
