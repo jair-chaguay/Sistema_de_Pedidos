@@ -174,6 +174,16 @@ public class VentanaPedidoController implements Initializable {
 
             public void run() {
                 for (int i = 0; i < listaPedidos.size(); i++) {
+                    Label lblDescr= new Label(listaPedidos.get(i).getDescripcion());
+                    Label lblCant= new Label(String.valueOf(listaPedidos.get(i).getCantidad()));
+                    Label lblPrecio= new Label(String.valueOf(listaPedidos.get(i).valorTotal()));
+                    
+                    
+                    GridPane.setConstraints(lblDescr,0,i+1);
+                    GridPane.setConstraints(lblCant,1,i+1);
+                    GridPane.setConstraints(lblPrecio,2,i+1);
+
+                    gridPedido.getChildren().addAll(lblDescr,lblCant,lblPrecio);
 
                 }
             }
