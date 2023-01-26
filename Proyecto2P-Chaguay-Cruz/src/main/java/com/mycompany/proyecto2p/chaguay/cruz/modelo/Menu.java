@@ -46,6 +46,30 @@ public class Menu {
     public String toString() {
         return "Menu{" + "descripcion=" + descripcion + ", precio=" + precio + ", tipo=" + tipo + '}';
     }
+    
+    
+     public static ArrayList<Menu> leerArchivo() {
+        ArrayList<Menu> menu = new ArrayList<>();
+        try ( BufferedReader bfr = new BufferedReader(new FileReader("Menu.txt"))) {
+            
+            String linea;
+            linea=bfr.readLine();
+            Menu m;
+            while((linea=bfr.readLine())!=null){
+                String[] lineas=linea.trim().split(",");
+                Menu mn= new Menu(lineas[0],Double.parseDouble(lineas[1]),lineas[2]);
+                menu.add(mn);
+            
+            
+            }
+            return menu;
+
+        } catch (IOException ex) {
+            ex.getMessage();
+            return null;
+        }
+
+    }
 
     
 
