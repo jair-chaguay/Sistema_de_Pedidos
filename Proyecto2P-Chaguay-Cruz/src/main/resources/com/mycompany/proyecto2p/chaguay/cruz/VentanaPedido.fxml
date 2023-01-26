@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="713.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaPedidoController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="713.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaPedidoController">
    <children>
       <HBox prefHeight="75.0" prefWidth="600.0">
          <children>
@@ -80,7 +80,7 @@
             <Insets left="30.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="155.0" prefWidth="600.0" spacing="70.0">
+      <HBox prefHeight="168.0" prefWidth="713.0" spacing="70.0">
          <children>
             <GridPane fx:id="gridOpciones" alignment="TOP_CENTER" prefHeight="155.0" prefWidth="325.0">
               <columnConstraints>
@@ -91,8 +91,8 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="57.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <HBox.margin>
                   <Insets left="20.0" />
