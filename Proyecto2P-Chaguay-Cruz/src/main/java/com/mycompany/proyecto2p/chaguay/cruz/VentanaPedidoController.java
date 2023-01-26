@@ -5,7 +5,6 @@
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
-import static com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu.leerArchivo;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
@@ -47,12 +46,15 @@ public class VentanaPedidoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
+     
             mn = leerArchivo();
-            cargarCombo();
-
-        } catch (IOException | RuntimeException e) {
-        }
+            
+            try{
+                cargarCombo();
+            }catch(IOException e){
+                
+            }
+           
         // TODO
     }
 
@@ -85,7 +87,30 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private GridPane gridPedido;
+    
+    
+    
+    public ArrayList<Menu> leerArchivo() {
+        ArrayList<Menu> menu = new ArrayList<>();
+        try ( BufferedReader bfr = new BufferedReader(new FileReader("Menu.txt"))) {            
+            String linea;
+            linea=bfr.readLine();
+            Menu m;
+            while((linea=bfr.readLine())!=null){
+                String[] lineas=linea.trim().split(",");
+                Menu mn= new Menu(lineas[0],Double.parseDouble(lineas[1]),lineas[2]);
+                menu.add(mn);                        
+            }               
+        } catch (IOException ex) {
+            ex.getMessage();
+            return null;
+        }
+        return menu;
+    }
 
+    
+
+    
     void cargarCombo() throws IOException {
         ArrayList<String> tipos = new ArrayList<>();
         tipos.add("PlatoFuerte");
