@@ -62,7 +62,13 @@ public class VentanaPedidoController implements Initializable {
     private ComboBox<Menu> cbxordenar;
 
     void cargarCombo() throws IOException {
-        
+        for (Menu menu : mn) {
+            if (menu.getDescripcion().equals("F")) {
+                
+
+            }
+
+        }
     }
 
 }
