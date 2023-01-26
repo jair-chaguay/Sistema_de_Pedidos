@@ -1,8 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController">
-    
-    </VBox>
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="640.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto2p.chaguay.cruz.VentanaPedidoController">
+   <children>
+      <HBox prefHeight="75.0" prefWidth="600.0">
+         <children>
+            <Label text="Realice su pedido" textFill="ORANGE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="56.0" prefWidth="600.0" spacing="70.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <HBox.margin>
+                  <Insets left="45.0" />
+               </HBox.margin>
+               <children>
+                  <Label text="Tipo:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbxmenu" prefHeight="25.0" prefWidth="144.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="266.0" spacing="20.0">
+               <children>
+                  <Label text="Ordenar por:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbxordenar" prefWidth="150.0" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="29.0" prefWidth="600.0" spacing="256.0">
+         <children>
+            <Label text="Opciones" textFill="ORANGE">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Pedido" textFill="ORANGE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="65.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="155.0" prefWidth="600.0" spacing="70.0">
+         <children>
+            <GridPane alignment="TOP_CENTER" prefHeight="100.0" prefWidth="277.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="67.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="55.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="49.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="49.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <children>
+                  <Label text="Precio" textAlignment="CENTER" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Cantidad" textAlignment="CENTER" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Descripción">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <TableView prefHeight="155.0" prefWidth="236.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Descripción" />
+                <TableColumn prefWidth="75.0" text="Cantidad" />
+                  <TableColumn prefWidth="75.0" text="Valor" />
+              </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <VBox prefHeight="82.0" prefWidth="600.0">
+         <children>
+            <GridPane prefHeight="82.0" prefWidth="109.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="509.0" minWidth="10.0" prefWidth="72.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="68.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <VBox.margin>
+                  <Insets left="400.0" right="60.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Subtotal:" textFill="#da8a01">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="IVA:" textFill="#da8a01" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total:" textFill="#da8a01" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Label" GridPane.columnIndex="1" />
+                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="600.0" spacing="40.0">
+         <children>
+            <Button fx:id="btnContinuar" mnemonicParsing="false" style="-fx-background-color: #ffbe4e;" text="Continuar">
+               <padding>
+                  <Insets bottom="3.0" left="10.0" right="10.0" top="3.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" style="-fx-background-color: #ffbe4e;" text="Limpiar">
+               <padding>
+                  <Insets bottom="3.0" left="10.0" right="10.0" top="3.0" />
+               </padding>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
+
