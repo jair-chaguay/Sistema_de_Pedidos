@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import java.util.Random;
+import javafx.application.Platform;
 
 /**
  * FXML Controller class
@@ -34,47 +35,68 @@ public class VentanaMapaController implements Initializable {
      * Initializes the controller class.
      */
     private ArrayList<Locales> local;
-    @FXML 
-    private Pane rootPane;    
+    @FXML
+    private Pane rootPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        local=Locales.leerLocales();
-        agregarImgview();
-        
+        local = Locales.leerLocales();
+        actualizarVentana(local);
+
     }
 
-    
-    void agregarImgview(){        
-        ImageView imgv=null;
-        for(Locales loc:local){
-            try(FileInputStream input=new FileInputStream(Principal.pathImages+"iconoComida.png")){
-                Image img=new Image(input,40,40,false,false);                
-                imgv=new ImageView(img);
-                imgv.setLayoutX(loc.getCoordX());
-                imgv.setLayoutY(loc.getCoordY());
-               
-            }catch(IOException ex){
-                
-            }
-            
-            String name=loc.getNombre();
-            String direccion=loc.getDireccion();
-            String horario=loc.getHorario();           
-            
-            
-            rootPane.getChildren().add(imgv);            
-            imgv.setOnMouseClicked(new EventHandler<MouseEvent>(){
-                public void handle(MouseEvent e){
-                    Alert al=new Alert(AlertType.INFORMATION);                    
-                    al.showAndWait();
-                    
+    void actualizarVentana(ArrayList<Locales> l) {
+        int al = (int) (Math.random() * 10 + 1);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < l.size(); i++) {
+                    agregarImgview();
+                    try {
+                        Thread.sleep(al * 1000);
+                    } catch (InterruptedException e) {
+                        e.getMessage();
+                    }
                 }
-            });
-                        
-        }
+            }
+        });
+        t.start();
     }
-    
-    
+
+    void agregarImgview() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ImageView imgv = null;
+                for (Locales loc : local) {
+                    try ( FileInputStream input = new FileInputStream(Principal.pathImages + "iconoComida.png")) {
+                        Image img = new Image(input, 40, 40, false, false);
+                        imgv = new ImageView(img);
+                        imgv.setLayoutX(loc.getCoordX());
+                        imgv.setLayoutY(loc.getCoordY());
+
+                    } catch (IOException ex) {
+
+                    }
+
+                    String name = loc.getNombre();
+                    String direccion = loc.getDireccion();
+                    String horario = loc.getHorario();
+
+                    rootPane.getChildren().add(imgv);
+                    imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent e) {
+                            Alert al = new Alert(AlertType.INFORMATION);
+                            al.showAndWait();
+
+                        }
+                    });
+
+                }
+            }
+        });
+
+    }
 
 }
