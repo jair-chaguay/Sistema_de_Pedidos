@@ -52,6 +52,8 @@ public class VentanaPedidoController implements Initializable {
     static ArrayList<Menu> menulista = new ArrayList<>();
     static ArrayList<Pedido> listaPedidos = new ArrayList<>();
     double total;
+    double totalIVA;
+    String cliente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -299,14 +301,17 @@ public class VentanaPedidoController implements Initializable {
     }
 
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
-
-        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
             for (Pedido p : listaPedido) {
                 total += p.getValor();
-                double totalIVA = (total + (total * 0.12))/2;
-                bw.write(crearCodigo() + "," + p.getNombreCliente() + "," + totalIVA);
+                totalIVA = (total + (total * 0.12))/2;
+                cliente=p.getNombreCliente();
+                
             }
-
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
+            
+            
+                bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
+            
         } catch (IOException ioe) {
             System.out.println("Se ha registrado un error al registrar el pedido!");
 
