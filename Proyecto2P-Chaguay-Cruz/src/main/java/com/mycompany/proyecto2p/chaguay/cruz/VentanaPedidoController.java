@@ -243,6 +243,7 @@ public class VentanaPedidoController implements Initializable {
 
             @Override
             public void run() {
+                double precio=0;
                 for (int i = 0; i < listaPedidos.size(); i++) {
 
                     Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
@@ -257,12 +258,12 @@ public class VentanaPedidoController implements Initializable {
 
                 }
                 for (int j = 0; j < listaPedidos.size(); j++) {
-                    double suma = listaPedidos.get(j).valorTotal();
-                    total += suma;
+                    double suma= listaPedidos.get(j).valorTotal();
+                    precio+=suma;
 
-                    double subtotalIVA = total + (total * 0.12);
-                    lblSubtotal.setText(String.valueOf(total));
-                    lblIva.setText("12%");
+                    double subtotalIVA = precio + (precio * 0.12);
+                    lblSubtotal.setText(String.valueOf(precio));
+                    lblIva.setText(String.valueOf(precio*0.12));
                     lblTotal.setText(String.valueOf(subtotalIVA));
 
                 }
@@ -302,7 +303,7 @@ public class VentanaPedidoController implements Initializable {
         try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
             for (Pedido p : listaPedido) {
                 total += p.getValor();
-                double totalIVA = total + (total * 0.12);
+                double totalIVA = (total + (total * 0.12))/2;
                 bw.write(crearCodigo() + "," + p.getNombreCliente() + "," + totalIVA);
             }
 
