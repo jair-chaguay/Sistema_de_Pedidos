@@ -210,9 +210,9 @@ public class VentanaPedidoController implements Initializable {
                         } catch (ValorInsuficienteException ex) {
                             String mensaje = ex.getMessage();
                             lblMensaje.setText(mensaje);
-                          
-                        }   
-                        
+
+                        }
+
                     }
 
                 });
@@ -237,7 +237,7 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-    
+
     public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
 
@@ -260,7 +260,7 @@ public class VentanaPedidoController implements Initializable {
                     double suma = listaPedidos.get(j).valorTotal();
                     total += suma;
 
-                    double subtotalIVA = total + (total * 0.14);
+                    double subtotalIVA = total + (total * 0.12);
                     lblSubtotal.setText(String.valueOf(total));
                     lblIva.setText("12%");
                     lblTotal.setText(String.valueOf(subtotalIVA));
@@ -275,6 +275,7 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void contPago(ActionEvent e) throws IOException {
         mostrarVentana(e);
+        registrarPedido(listaPedidos);
 
     }
 
@@ -295,21 +296,19 @@ public class VentanaPedidoController implements Initializable {
             ex.getMessage();
         }
     }
-    
-    public void registrarPedido(ArrayList<Pedido> listaPedido){
-        
-        for(Pedido p:listaPedido){
-            total += p.getValor();
-        }
-        
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))){
-            for(Pedido p:listaPedido){
-                bw.write(crearCodigo() + "," + p.getNombreCliente() + "," + total);
+
+    public void registrarPedido(ArrayList<Pedido> listaPedido) {
+
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
+            for (Pedido p : listaPedido) {
+                total += p.getValor();
+                double totalIVA = total + (total * 0.12);
+                bw.write(crearCodigo() + "," + p.getNombreCliente() + "," + totalIVA);
             }
-            
-        }catch(IOException ioe){
+
+        } catch (IOException ioe) {
             System.out.println("Se ha registrado un error al registrar el pedido!");
-            
+
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error de Registro");
             alerta.setHeaderText("No ha sido posible registrar este pedido");
@@ -332,7 +331,6 @@ public class VentanaPedidoController implements Initializable {
         return valor;
 
     }
-
 
     @FXML
     void limpiar(ActionEvent ev) {
