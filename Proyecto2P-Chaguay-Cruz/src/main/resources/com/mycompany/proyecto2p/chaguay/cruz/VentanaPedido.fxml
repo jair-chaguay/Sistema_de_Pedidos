@@ -184,9 +184,9 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblSubtotal" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lblIva" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblTotal" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

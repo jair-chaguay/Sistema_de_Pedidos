@@ -8,6 +8,7 @@ import static com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController.usu
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.ValorInsuficienteException;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -124,37 +125,58 @@ public class VentanaPedidoController implements Initializable {
 
         if (opcion.equals("Platos Fuertes")) {
             gridOpciones.getChildren().clear();
-            
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+
             String tipoPedido = "F";
             mostrarMenu(tipoPedido);
 
         } else if (opcion.equals("Bebidas")) {
             gridOpciones.getChildren().clear();
-           
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+
             String tipoPedido = "B";
             mostrarMenu(tipoPedido);
 
         } else if (opcion.equals("Postres")) {
             gridOpciones.getChildren().clear();
-            
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+
             String tipoPedido = "P";
             mostrarMenu(tipoPedido);
 
         } else if (opcion.equals("Piqueos")) {
             gridOpciones.getChildren().clear();
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
             String tipoPedido = "Q";
             mostrarMenu(tipoPedido);
 
         }
 
     }
-    
-    public class ValorInsuficienteException extends Exception{
-        public ValorInsuficienteException(String msg){
-            super("Ingresar una cantidad valida");
-        }
-    }
-    
 
     public void mostrarMenu(String tipo) {
         for (int i = 0; i < menulista.size(); i++) {
@@ -164,14 +186,13 @@ public class VentanaPedidoController implements Initializable {
                 Label lblDescrp = new Label(menu.getDescripcion());
                 Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad = new TextField();
-                
 
                 Button btnAgregar = new Button("Agregar");
                 btnAgregar.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        //CREACION DE UN PEDIDO
 
+                        //CREACION DE UN PEDIDO
                         Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
                         listaPedidos.add(p);
                         mostrarEscogidos();
