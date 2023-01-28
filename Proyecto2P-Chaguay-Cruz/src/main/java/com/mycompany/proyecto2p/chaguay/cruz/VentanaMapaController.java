@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import java.util.Random;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -31,71 +32,101 @@ import javafx.application.Platform;
  */
 public class VentanaMapaController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     private ArrayList<Locales> local;
+    private ImageView imgv;
+
     @FXML
     private Pane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         local = Locales.leerLocales();
-        actualizarVentana(local);
-
-    }
-
-    void actualizarVentana(ArrayList<Locales> l) {
-        int al = (int) (Math.random() * 10 + 1);
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < l.size(); i++) {
-                    agregarImgview();
-                    try {
-                        Thread.sleep(al * 1000);
-                    } catch (InterruptedException e) {
-                        e.getMessage();
-                    }
-                }
-            }
-        });
-        t.start();
+        agregarImgview();
     }
 
     void agregarImgview() {
-        Platform.runLater(new Runnable() {
-            @Override
+
+        rootPane.getChildren().clear();
+        imgv = null;
+
+        Thread t = new Thread(new Runnable() {
             public void run() {
-                ImageView imgv = null;
+
                 for (Locales loc : local) {
-                    try ( FileInputStream input = new FileInputStream(Principal.pathImages + "iconoComida.png")) {
-                        Image img = new Image(input, 40, 40, false, false);
-                        imgv = new ImageView(img);
-                        imgv.setLayoutX(loc.getCoordX());
-                        imgv.setLayoutY(loc.getCoordY());
-
-                    } catch (IOException ex) {
-
+                    Random r = new Random();
+                    int n = r.nextInt(11);
+                    try {
+                        Thread.sleep(n * 1000);
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
                     }
 
-                    String name = loc.getNombre();
-                    String direccion = loc.getDireccion();
-                    String horario = loc.getHorario();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try ( FileInputStream input = new FileInputStream(Principal.pathImages + "iconoComida.png")) {
+                                Image img = new Image(input, 40, 40, false, false);
+                                imgv = new ImageView(img);
 
-                    rootPane.getChildren().add(imgv);
-                    imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent e) {
-                            Alert al = new Alert(AlertType.INFORMATION);
-                            al.showAndWait();
+                                imgv.setX(loc.getCoordX());
+                                imgv.setY(loc.getCoordY());
+
+                            } catch (IOException ex) {
+
+                            }
+
+                            String name = loc.getNombre();
+                            String direccion = loc.getDireccion();
+                            String horario = loc.getHorario();
+
+                            rootPane.getChildren().add(imgv);
+                            imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                public void handle(MouseEvent e) {
+                                    Alert al = new Alert(AlertType.INFORMATION);
+
+                                    Thread t2 = new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            for (int i = 5; i >= 0; i--) {
+                                                String finish = "La ventana se cerrara en " + i + " segundos";
+                                                
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException ex) {
+
+                                                }
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        al.setContentText(finish);
+
+                                                    }
+
+                                                });
+                                                
+
+                                            }
+
+                                        }
+
+                                    });
+
+                                    t2.setDaemon(true);
+                                    t2.start();
+                                    al.showAndWait();                                    
+                                    
+                                }
+
+                            });
 
                         }
                     });
 
                 }
             }
-        });
+        }
+        );
+        t.start();
 
     }
 
