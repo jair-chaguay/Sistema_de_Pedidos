@@ -76,13 +76,14 @@ public class VentanaMapaController implements Initializable {
                             }
 
                             String name = loc.getNombre();
-                            String direccion = loc.getDireccion();
+                            String direccion =loc.getDireccion();
                             String horario = loc.getHorario();
 
                             rootPane.getChildren().add(imgv);
                             imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                 public void handle(MouseEvent e) {
-                                    Alert al = new Alert(AlertType.INFORMATION);
+                                    Alert al = new Alert(AlertType.INFORMATION);                                    
+                                    al.setHeaderText(name+"\n"+direccion+"\n"+horario);
 
                                     Thread t2 = new Thread(new Runnable() {
                                         @Override
@@ -100,6 +101,7 @@ public class VentanaMapaController implements Initializable {
                                                     
                                                     @Override
                                                     public void run() {
+                                                        
                                                         al.setContentText(finish);
                                                         if(contador==0){
                                                             al.close();

@@ -8,6 +8,7 @@ import com.mycompany.proyecto2p.chaguay.cruz.Principal;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -70,7 +71,7 @@ public class Locales {
     }
     
         public static ArrayList<Locales> leerLocales() {
-        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Locales.txt"))) {
+        try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Locales.txt",StandardCharsets.UTF_8))) {
             ArrayList<Locales> local = new ArrayList<>();
             String linea=null;
             while ((linea = bfr.readLine()) != null) {
