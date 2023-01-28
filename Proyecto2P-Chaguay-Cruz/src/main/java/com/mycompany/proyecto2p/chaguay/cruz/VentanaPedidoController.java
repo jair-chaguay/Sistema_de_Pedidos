@@ -203,7 +203,7 @@ public class VentanaPedidoController implements Initializable {
 
                         try {
                             String cant = cantidad.getText();
-                            valorErroneo(cant);
+                            valorErroneo(cant,cantidad);
                             Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
                             listaPedidos.add(p);
                             mostrarEscogidos();
@@ -213,6 +213,9 @@ public class VentanaPedidoController implements Initializable {
                             String mensaje = ex.getMessage();
                             lblMensaje.setText(mensaje);
 
+                        }catch(NumberFormatException ex){
+                            String mensaje="Escribir un numero en la casilla";
+                            lblMensaje.setText(mensaje);
                         }
 
                     }
@@ -232,8 +235,8 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    static void valorErroneo(String cantidad) throws ValorInsuficienteException {
-        if (Integer.parseInt(cantidad) == 0 || cantidad == null) {
+    static void valorErroneo(String cantidad, TextField text) throws ValorInsuficienteException {
+        if (Integer.parseInt(cantidad) == 0 || text==null) {
             throw new ValorInsuficienteException("Ingresar un número válido");
 
         }
