@@ -11,7 +11,9 @@ import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.ValorInsuficienteException;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -26,6 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -234,22 +237,7 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-    //METODO PARA CREAR ID PEDIDO
-
-    public int crearCodigo() {
-        String opciones = "1234567890";
-        String cadena = "";
-        Random r = new Random();
-        for (int i = 0; i < 4; i++) {
-            int posicion = r.nextInt(opciones.length());
-            char caracter = opciones.charAt(posicion);
-            cadena += caracter;
-        }
-        int valor = Integer.parseInt(cadena);
-        return valor;
-
-    }
-
+    
     public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
 
@@ -307,6 +295,44 @@ public class VentanaPedidoController implements Initializable {
             ex.getMessage();
         }
     }
+    
+    public void registrarPedido(ArrayList<Pedido> listaPedido){
+        
+        for(Pedido p:listaPedido){
+            total += p.getValor();
+        }
+        
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))){
+            for(Pedido p:listaPedido){
+                bw.write(crearCodigo() + "," + p.getNombreCliente() + "," + total);
+            }
+            
+        }catch(IOException ioe){
+            System.out.println("Se ha registrado un error al registrar el pedido!");
+            
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error de Registro");
+            alerta.setHeaderText("No ha sido posible registrar este pedido");
+            alerta.showAndWait();
+
+        }
+    }
+    //METODO PARA CREAR ID PEDIDO
+
+    public int crearCodigo() {
+        String opciones = "1234567890";
+        String cadena = "";
+        Random r = new Random();
+        for (int i = 0; i < 4; i++) {
+            int posicion = r.nextInt(opciones.length());
+            char caracter = opciones.charAt(posicion);
+            cadena += caracter;
+        }
+        int valor = Integer.parseInt(cadena);
+        return valor;
+
+    }
+
 
     @FXML
     void limpiar(ActionEvent ev) {
