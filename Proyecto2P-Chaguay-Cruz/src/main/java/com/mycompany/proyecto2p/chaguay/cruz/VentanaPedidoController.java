@@ -35,6 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -91,6 +92,9 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     private GridPane gridPedido;
 
+    @FXML
+    private HBox hbOrdenar;
+
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Menu.txt", StandardCharsets.UTF_8))) {
@@ -119,7 +123,7 @@ public class VentanaPedidoController implements Initializable {
     }
 
     @FXML
-    void comboEvents(ActionEvent e) {
+    void comboEvents(ActionEvent e) throws ValorInsuficienteException {
 
         String opcion = cbxmenu.getValue();
 
@@ -178,7 +182,7 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    public void mostrarMenu(String tipo) {
+    public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
             Menu menu = menulista.get(i);
 
@@ -192,11 +196,21 @@ public class VentanaPedidoController implements Initializable {
                     @Override
                     public void handle(MouseEvent t) {
 
-                        //CREACION DE UN PEDIDO
-                        Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
-                        listaPedidos.add(p);
-                        mostrarEscogidos();
+                        try {
+                            String cant = cantidad.getText();
+                            valorErroneo(cant);
+                            Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
+                            listaPedidos.add(p);
+                            mostrarEscogidos();
 
+                        } catch (ValorInsuficienteException ex) {
+                            String mensaje = ex.getMessage();
+                            Label lblMsj = new Label(mensaje);
+                            hbOrdenar.getChildren().add(lblMsj);
+
+                        }
+
+//                      
                     }
 
                 });
@@ -209,6 +223,14 @@ public class VentanaPedidoController implements Initializable {
                 gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
 
             }
+
+        }
+
+    }
+
+    static void valorErroneo(String cantidad) throws ValorInsuficienteException {
+        if (Integer.parseInt(cantidad) == 0 || cantidad == null) {
+            throw new ValorInsuficienteException("Ingresar un numero valido");
 
         }
 
