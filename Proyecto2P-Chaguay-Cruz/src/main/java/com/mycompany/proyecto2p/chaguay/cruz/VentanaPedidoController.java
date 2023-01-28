@@ -343,5 +343,23 @@ public class VentanaPedidoController implements Initializable {
     public void ordenarPor(ActionEvent ae) {
 
     }
+    
+    
+    
+     public void closeWindows() {
+            try{
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
+            
+            Parent root = loader.load();
+            VentanaPagoController controlador=loader.getController();
+            Scene scene = new Scene(root, 640, 480);
+            Stage stage=new Stage();
+            stage.setScene(scene);
+            stage.show();                        
+           
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

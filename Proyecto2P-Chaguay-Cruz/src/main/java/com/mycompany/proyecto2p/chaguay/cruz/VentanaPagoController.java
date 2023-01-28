@@ -36,13 +36,16 @@ public class VentanaPagoController implements Initializable {
     public void closeWindows() {
             try{
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
+            
             Parent root = loader.load();
             Scene scene = new Scene(root, 640, 480);
             Stage stage=new Stage();
             stage.setScene(scene);
             stage.show();
             Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
-            myStage.close();                       
+            myStage.close();    
+            
+           
         } catch (IOException ex) {
             ex.printStackTrace();
         }

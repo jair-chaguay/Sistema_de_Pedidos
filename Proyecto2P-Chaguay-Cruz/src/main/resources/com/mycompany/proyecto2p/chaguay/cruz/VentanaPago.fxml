@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="600.0" spacing="30.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Dirección de entrega" textFill="#e89300">
@@ -69,7 +68,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: ffbb44;" text="Continuar">
+            <Button fx:id="btnIngresar" mnemonicParsing="false" style="-fx-background-color: ffbb44;" text="Continuar">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -89,4 +88,3 @@
       </HBox>
    </children>
 </VBox>
-
