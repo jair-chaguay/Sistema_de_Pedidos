@@ -91,14 +91,16 @@ public class VentanaMapaController implements Initializable {
                                                 String finish = "La ventana se cerrara en " + i + " segundos";
                                                 
                                                 try {
-                                                    Thread.sleep(1000);
+                                                    Thread.sleep(1000);                                                    
                                                 } catch (InterruptedException ex) {
 
                                                 }
                                                 Platform.runLater(new Runnable() {
+                                                    
                                                     @Override
                                                     public void run() {
                                                         al.setContentText(finish);
+                                                        
 
                                                     }
 
@@ -114,7 +116,6 @@ public class VentanaMapaController implements Initializable {
                                     t2.setDaemon(true);
                                     t2.start();
                                     al.showAndWait();                                    
-                                    
                                 }
 
                             });
