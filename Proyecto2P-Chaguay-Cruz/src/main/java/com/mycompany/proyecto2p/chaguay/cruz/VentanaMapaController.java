@@ -88,6 +88,7 @@ public class VentanaMapaController implements Initializable {
                                         @Override
                                         public void run() {
                                             for (int i = 5; i >= 0; i--) {
+                                                int contador=i;
                                                 String finish = "La ventana se cerrara en " + i + " segundos";
                                                 
                                                 try {
@@ -100,8 +101,9 @@ public class VentanaMapaController implements Initializable {
                                                     @Override
                                                     public void run() {
                                                         al.setContentText(finish);
-                                                        
-
+                                                        if(contador==0){
+                                                            al.close();
+                                                        }
                                                     }
 
                                                 });
