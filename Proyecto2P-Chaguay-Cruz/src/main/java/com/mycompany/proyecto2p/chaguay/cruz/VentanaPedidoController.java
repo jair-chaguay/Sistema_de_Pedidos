@@ -93,7 +93,7 @@ public class VentanaPedidoController implements Initializable {
     private GridPane gridPedido;
 
     @FXML
-    private HBox hbOrdenar;
+    private Label lblMensaje;
 
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
@@ -202,15 +202,14 @@ public class VentanaPedidoController implements Initializable {
                             Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
                             listaPedidos.add(p);
                             mostrarEscogidos();
+                            lblMensaje.setText("");
 
                         } catch (ValorInsuficienteException ex) {
                             String mensaje = ex.getMessage();
-                            Label lblMsj = new Label(mensaje);
-                            hbOrdenar.getChildren().add(lblMsj);
-
-                        }
-
-//                      
+                            lblMensaje.setText(mensaje);
+                          
+                        }   
+                        
                     }
 
                 });
@@ -230,7 +229,7 @@ public class VentanaPedidoController implements Initializable {
 
     static void valorErroneo(String cantidad) throws ValorInsuficienteException {
         if (Integer.parseInt(cantidad) == 0 || cantidad == null) {
-            throw new ValorInsuficienteException("Ingresar un numero valido");
+            throw new ValorInsuficienteException("Ingresar un número válido");
 
         }
 

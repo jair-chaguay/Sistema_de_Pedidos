@@ -57,7 +57,7 @@
       </HBox>
       <HBox prefHeight="29.0" prefWidth="600.0" spacing="256.0">
          <children>
-            <Label text="Opciones" textFill="ORANGE">
+            <Label fx:id="hbOrdenar" text="Opciones" textFill="ORANGE">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -146,6 +146,11 @@
       </HBox>
       <VBox prefHeight="82.0" prefWidth="600.0">
          <children>
+            <Label fx:id="lblMensaje" prefHeight="17.0" prefWidth="382.0" text="Info:" textAlignment="RIGHT" textFill="#e40707">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             <GridPane prefHeight="82.0" prefWidth="109.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="509.0" minWidth="10.0" prefWidth="72.0" />
