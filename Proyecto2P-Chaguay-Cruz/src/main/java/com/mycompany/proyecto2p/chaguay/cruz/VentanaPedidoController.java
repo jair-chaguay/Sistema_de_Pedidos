@@ -61,6 +61,7 @@ public class VentanaPedidoController implements Initializable {
         menulista = leerArchivo();
         try {
             cargarCombo();
+            cargarCombo2();
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -126,6 +127,20 @@ public class VentanaPedidoController implements Initializable {
         cbxmenu.getItems().setAll(tipos);
 
     }
+    void cargarCombo2() throws IOException {
+        ArrayList<String> ordenar = new ArrayList<>();
+        ordenar.add("Precio");
+        ordenar.add("Nombre");
+        cbxordenar.getItems().setAll(ordenar);
+
+    }
+    
+    @FXML
+    void ordenarPor(ActionEvent e){
+        String opcion=cbxordenar.getValue();
+        
+    
+    }
 
     @FXML
     void comboEvents(ActionEvent e) throws ValorInsuficienteException {
@@ -190,8 +205,11 @@ public class VentanaPedidoController implements Initializable {
     public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
             Menu menu = menulista.get(i);
+            
 
             if (menulista.get(i).getTipo().equals(tipo)) {
+                
+                
                 Label lblDescrp = new Label(menu.getDescripcion());
                 Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad = new TextField();
@@ -347,12 +365,6 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    @FXML
-    public void ordenarPor(ActionEvent ae) {
-
-    }
-    
-    
     
      public void closeWindows() {
             try{
