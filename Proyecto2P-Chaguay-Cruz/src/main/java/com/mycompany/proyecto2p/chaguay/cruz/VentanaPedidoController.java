@@ -10,7 +10,6 @@ import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedidos;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.ValorInsuficienteException;
-import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
