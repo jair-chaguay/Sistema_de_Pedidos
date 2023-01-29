@@ -128,6 +128,17 @@ public class VentanaPagoController implements Initializable {
 
     @FXML
     void MostrarFinal(ActionEvent e) {
+        
+        validacion();
+        try{
+        MostrarVentana(e);
+        }catch(IOException ex){
+            
+        }
+        ingresardatos();
+        
+    }
+    void validacion(){
         if (btnIngresar.isPressed()) {
             if (txtDireccion.getText().isEmpty()) {
                 Alert al = new Alert(AlertType.ERROR);
@@ -147,17 +158,17 @@ public class VentanaPagoController implements Initializable {
                     al.setTitle("Error");
                     al.setHeaderText("Error: El campo de titular se encuentra vacío");
                     al.setContentText("Ingrese un valor");
-                }else if(txtNum.getText().equals("")){
+                } else if (txtNum.getText().equals("")) {
                     Alert al = new Alert(AlertType.ERROR);
                     al.setTitle("Error");
                     al.setHeaderText("Error: El campo del numero de tarjeta se encuentra vacío");
                     al.setContentText("Ingrese un valor");
-                }else if(txtcad.getText().equals("")){
+                } else if (txtcad.getText().equals("")) {
                     Alert al = new Alert(AlertType.ERROR);
                     al.setTitle("Error");
                     al.setHeaderText("Error: El campo de caducidad se encuentra vacío");
                     al.setContentText("Ingrese un valor");
-                }else if(txtcv.getText().equals("")){
+                } else if (txtcv.getText().equals("")) {
                     Alert al = new Alert(AlertType.ERROR);
                     al.setTitle("Error");
                     al.setHeaderText("Error: El campo de CVV se encuentra vacío");
@@ -165,7 +176,24 @@ public class VentanaPagoController implements Initializable {
                 }
             }
 
+            
         }
+    }
+    void MostrarVentana(ActionEvent a) throws IOException{
+        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaFinal.fxml"));
+            try {
+                Parent root = loader.load();
+
+                VentanaFinalController controlador = loader.getController();
+                Scene scene = new Scene(root, 640, 600);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();                
+                Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
+                myStage.close();
+            } catch (IOException ex) {
+                ex.getMessage();
+            }
     }
 
     public int crearCodigo() {
