@@ -21,7 +21,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <Label text="Elige la opción que prefieras" textFill="WHITE">
+            <Label fx:id="LblOpcion" text="Elige la opción que prefieras" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Insets bottom="5.0" left="14.0" right="14.0" top="5.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" onAction="#hazPedido" style="-fx-background-color: orange;" text="Haz tu pedido">
+            <Button fx:id="btnPedido" mnemonicParsing="false" onAction="#hazPedido" style="-fx-background-color: orange;" text="Haz tu pedido">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

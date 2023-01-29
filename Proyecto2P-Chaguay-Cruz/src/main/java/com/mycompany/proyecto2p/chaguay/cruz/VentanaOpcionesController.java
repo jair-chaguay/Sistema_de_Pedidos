@@ -48,6 +48,12 @@ public class VentanaOpcionesController implements Initializable {
     private Button btnGrabar;
     
     @FXML
+    private Label LblOpcion;
+    
+    @FXML 
+    private Button btnPedido;
+    
+    @FXML
     private Label LblUsuario;  
     
     
