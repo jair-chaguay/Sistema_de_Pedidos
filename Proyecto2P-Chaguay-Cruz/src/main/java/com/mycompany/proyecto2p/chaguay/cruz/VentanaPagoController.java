@@ -68,14 +68,16 @@ public class VentanaPagoController implements Initializable {
 
     @FXML
     void opcionEscogida(ActionEvent e){
-        for (Pedido p : VentanaPedidoController.listaPedidos) {
-                total=p.getValor();
-                totalIVA = (total + (total * 0.12))/2;
-                
-            }
+        
+        double valorTotal=0;
+        
+        for (Pedido p :VentanaPedidoController.listaPedidos) {
+            
+            valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
+        }
         
         if(btnEfectivo.isSelected()){
-            Labeltxt.setText("Tendrá que pagar " +totalIVA+ "dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
+            Labeltxt.setText("Tendrá que pagar " +valorTotal+ " dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
         }else if(btnTarjeta.isSelected()){
             Label lblTittular=new Label("Titular");
             Label lblNumero=new Label("Número");

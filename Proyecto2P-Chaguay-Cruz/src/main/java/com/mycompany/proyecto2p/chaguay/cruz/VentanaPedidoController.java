@@ -53,7 +53,7 @@ public class VentanaPedidoController implements Initializable {
 
     static ArrayList<Menu> menulista = new ArrayList<>();
     static ArrayList<Pedido> listaPedidos = new ArrayList<>();
-    static ArrayList<Pedidos> listPed=new ArrayList<>();
+    static ArrayList<Pedidos> listPed = new ArrayList<>();
     double total;
     double totalIVA;
     String cliente;
@@ -61,7 +61,6 @@ public class VentanaPedidoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        
         menulista = leerArchivo();
         try {
             cargarCombo();
@@ -131,6 +130,7 @@ public class VentanaPedidoController implements Initializable {
         cbxmenu.getItems().setAll(tipos);
 
     }
+
     void cargarCombo2() throws IOException {
         ArrayList<String> ordenar = new ArrayList<>();
         ordenar.add("Precio");
@@ -138,12 +138,11 @@ public class VentanaPedidoController implements Initializable {
         cbxordenar.getItems().setAll(ordenar);
 
     }
-    
+
     @FXML
-    void ordenarPor(ActionEvent e){
-        String opcion=cbxordenar.getValue();
-        
-    
+    void ordenarPor(ActionEvent e) {
+        String opcion = cbxordenar.getValue();
+
     }
 
     @FXML
@@ -209,11 +208,9 @@ public class VentanaPedidoController implements Initializable {
     public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
             Menu menu = menulista.get(i);
-            
 
             if (menulista.get(i).getTipo().equals(tipo)) {
-                
-                
+
                 Label lblDescrp = new Label(menu.getDescripcion());
                 Label lblPrecio = new Label(String.valueOf(menu.getPrecio()));
                 TextField cantidad = new TextField();
@@ -225,7 +222,7 @@ public class VentanaPedidoController implements Initializable {
 
                         try {
                             String cant = cantidad.getText();
-                            valorErroneo(cant,cantidad);
+                            valorErroneo(cant, cantidad);
                             Pedido p = new Pedido(menu.getDescripcion(), Integer.parseInt(cantidad.getText()), usuariosI.getNameApellido(), menu.getPrecio());
                             listaPedidos.add(p);
                             mostrarEscogidos();
@@ -235,8 +232,8 @@ public class VentanaPedidoController implements Initializable {
                             String mensaje = ex.getMessage();
                             lblMensaje.setText(mensaje);
 
-                        }catch(NumberFormatException ex){
-                            String mensaje="Escribir un numero en la casilla";
+                        } catch (NumberFormatException ex) {
+                            String mensaje = "Escribir un numero en la casilla";
                             lblMensaje.setText(mensaje);
                         }
 
@@ -258,7 +255,7 @@ public class VentanaPedidoController implements Initializable {
     }
 
     static void valorErroneo(String cantidad, TextField text) throws ValorInsuficienteException {
-        if (Integer.parseInt(cantidad) == 0 || text==null) {
+        if (Integer.parseInt(cantidad) == 0 || text == null) {
             throw new ValorInsuficienteException("Ingresar un número válido");
 
         }
@@ -270,7 +267,7 @@ public class VentanaPedidoController implements Initializable {
 
             @Override
             public void run() {
-                double precio=0;
+                double precio = 0;
                 for (int i = 0; i < listaPedidos.size(); i++) {
 
                     Label lblDescr = new Label(listaPedidos.get(i).getDescripcion());
@@ -285,12 +282,12 @@ public class VentanaPedidoController implements Initializable {
 
                 }
                 for (int j = 0; j < listaPedidos.size(); j++) {
-                    double suma= listaPedidos.get(j).valorTotal();
-                    precio+=suma;
+                    double suma = listaPedidos.get(j).valorTotal();
+                    precio += suma;
 
                     double subtotalIVA = precio + (precio * 0.12);
                     lblSubtotal.setText(String.valueOf(precio));
-                    lblIva.setText(String.valueOf(precio*0.12));
+                    lblIva.setText(String.valueOf(precio * 0.12));
                     lblTotal.setText(String.valueOf(subtotalIVA));
 
                 }
@@ -325,27 +322,51 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
+//    public void registrarPedido(ArrayList<Pedido> listaPedido) {
+//            for (Pedido p : listaPedido) {
+//                total += p.getValor();
+//                totalIVA = (total + (total * 0.12))/2;
+//                cliente=p.getNombreCliente();
+//                
+//            }
+//        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt",true))) {
+//            
+//            
+//                bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
+//            
+//        } catch (IOException ioe) {
+//            System.out.println("Se ha registrado un error al registrar el pedido!");
+//
+//            Alert alerta = new Alert(Alert.AlertType.ERROR);
+//            alerta.setTitle("Error de Registro");
+//            alerta.setHeaderText("No ha sido posible registrar este pedido");
+//            alerta.showAndWait();
+//
+//        }
+//    }
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
-            for (Pedido p : listaPedido) {
-                total += p.getValor();
-                totalIVA = (total + (total * 0.12))/2;
-                cliente=p.getNombreCliente();
-                
-            }
-        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt",true))) {
-            
-            
-                bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
-            
-        } catch (IOException ioe) {
-            System.out.println("Se ha registrado un error al registrar el pedido!");
-
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error de Registro");
-            alerta.setHeaderText("No ha sido posible registrar este pedido");
-            alerta.showAndWait();
-
+        double valorTotal=0;
+        for (Pedido p : listaPedido) {
+            valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
         }
+            
+            
+
+            try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
+
+                bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal);
+                bw.newLine();
+
+            } catch (IOException ioe) {
+                System.out.println("Se ha registrado un error al registrar el pedido!");
+
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Error de Registro");
+                alerta.setHeaderText("No ha sido posible registrar este pedido");
+                alerta.showAndWait();
+
+            }
+        
     }
     //METODO PARA CREAR ID PEDIDO
 
@@ -362,37 +383,35 @@ public class VentanaPedidoController implements Initializable {
         return valor;
 
     }
-    
-    public ArrayList<Pedidos> leerPedido(){
-        ArrayList<Pedidos> ped=new ArrayList<>();
-        try(BufferedReader bfr= new BufferedReader(new FileReader("Pedidos.txt",StandardCharsets.UTF_8))){
+
+    public ArrayList<Pedidos> leerPedido() {
+        ArrayList<Pedidos> ped = new ArrayList<>();
+        try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
             String linea;
-            while((linea=bfr.readLine())!=null){
-                String[] lineas=linea.split(",");
-                Pedidos pedido=new Pedidos(Integer.parseInt(lineas[0]),lineas[1],Double.parseDouble(lineas[2]));
+            while ((linea = bfr.readLine()) != null) {
+                String[] lineas = linea.split(",");
+                Pedidos pedido = new Pedidos(Integer.parseInt(lineas[0]), lineas[1], Double.parseDouble(lineas[2]));
                 ped.add(pedido);
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.getMessage();
             return null;
         }
         return ped;
     }
-    
-    void serializar(){
-        listPed=leerPedido();
-        for(Pedidos li:listPed){
-            try(ObjectOutputStream obj=new ObjectOutputStream(new FileOutputStream("pedido"+li.getIdPedido()+".bin"))){
+
+    void serializar() {
+        listPed = leerPedido();
+        for (Pedidos li : listPed) {
+            try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + li.getIdPedido() + ".bin"))) {
                 obj.writeObject(listPed);
-                
-            }catch(IOException e){
-                
+
+            } catch (IOException e) {
+
             }
 
         }
     }
-    
-    
 
     @FXML
     void limpiar(ActionEvent ev) {
@@ -400,18 +419,17 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
-    
-     public void closeWindows() {
-            try{
+    public void closeWindows() {
+        try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
-            
+
             Parent root = loader.load();
-            VentanaPagoController controlador=loader.getController();
+            VentanaPagoController controlador = loader.getController();
             Scene scene = new Scene(root, 640, 480);
-            Stage stage=new Stage();
+            Stage stage = new Stage();
             stage.setScene(scene);
-            stage.show();                        
-           
+            stage.show();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
