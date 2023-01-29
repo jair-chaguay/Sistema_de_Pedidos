@@ -1,0 +1,38 @@
+
+package com.mycompany.proyecto2p.chaguay.cruz;
+
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+public class Principal extends Application{
+    private static Scene scene;
+    public static String pathFiles="src/main/resources/Files/";
+    public static String pathImages="src/main/resources/styles/";
+    
+    @Override
+    public void start(Stage s) throws IOException{
+        FXMLLoader fxmlloader= new FXMLLoader(Principal.class.getResource("VentanaSistema.fxml"));
+        Parent root= fxmlloader.load();
+        scene = new Scene(root, 640,480);
+        s.setScene(scene);
+        s.setTitle("The Good Burguer Restaurant");
+        s.show();
+      
+        
+        
+        
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        launch();
+    }
+    
+}

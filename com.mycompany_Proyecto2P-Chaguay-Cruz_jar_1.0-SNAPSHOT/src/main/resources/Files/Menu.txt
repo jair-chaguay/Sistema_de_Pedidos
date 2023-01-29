@@ -1,0 +1,16 @@
+Hamburguesa Simple,5.00,F
+Churasco,3.00,F
+Yapingacho,3.50,F
+Guatita,1.00,F
+Tiramisu,4.00,P
+Tres Leches,2.50,P
+Mojada Chocolate,2.00,P
+Flan,1.00,P
+Coca Piña 400 ml,2.00,B
+Coca Cola 400 ml,2.00,B
+Agua 500 ml,0.50,B
+Café 400 ml,1.00,B
+Cheese Finger x5,30.00,Q
+Papas Fritas x20,1.00,Q
+Chifles x20,1.00,Q
+Patacones x10,2.00,Q

@@ -1,0 +1,8 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.Mapa{
+    -fx-background-image: url("mapa2.png");
+    -fx-background-size: 100% 100%;
+}
