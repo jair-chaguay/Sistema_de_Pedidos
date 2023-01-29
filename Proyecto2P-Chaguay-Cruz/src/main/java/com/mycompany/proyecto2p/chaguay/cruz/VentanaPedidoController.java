@@ -328,7 +328,7 @@ public class VentanaPedidoController implements Initializable {
                 cliente=p.getNombreCliente();
                 
             }
-        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt",true))) {
             
             
                 bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
