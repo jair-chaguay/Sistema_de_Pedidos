@@ -5,9 +5,18 @@
 package com.mycompany.proyecto2p.chaguay.cruz;
 
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedidos;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +26,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -33,67 +44,70 @@ import javafx.stage.Stage;
  */
 public class VentanaPagoController implements Initializable {
 
-    
-    
+    String d = "";
+    ArrayList<Pedidos> ped = new ArrayList<>();
+    int cod;
+
     @FXML
     private Button btnIngresar;
+
+    @FXML
+    private TextField txtDireccion;
 
     @FXML
     private RadioButton btnEfectivo;
 
     @FXML
     private RadioButton btnTarjeta;
-    
+
     @FXML
     private VBox seccionDatos;
     @FXML
     private GridPane gdOpciones;
-    
+
     @FXML
     private ToggleGroup opcionesPago;
     @FXML
     private Label Labeltxt;
-    
-           
-    
+
+    String tipo;
+    String nom;
     double total;
     double totalIVA;
-    
+
     double totalPorc;
-    
-    
+    TextField txtTi = new TextField();
+    TextField txtNum = new TextField();
+    TextField txtcad = new TextField();
+    TextField txtcv = new TextField();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Labeltxt.setText("");                
+        Labeltxt.setText("");
+
         // TODO
     }
 
     @FXML
-    void opcionEscogida(ActionEvent e){
-        
-        double valorTotal=0;
-        
-        for (Pedido p :VentanaPedidoController.listaPedidos) {
-            
-            valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
+    void opcionEscogida(ActionEvent e) {
+
+        double valorTotal = 0;
+
+        for (Pedido p : VentanaPedidoController.listaPedidos) {
+
+            valorTotal += p.valorTotal() + (p.valorTotal() * 0.12);
         }
-        totalPorc=(valorTotal*0.05)+valorTotal;
-        
-        if(btnEfectivo.isSelected()){
-            seccionDatos.getChildren().clear();           
-            Labeltxt.setText("Tendrá que pagar " +valorTotal+ " dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
-            seccionDatos.getChildren().add(Labeltxt);
-        }else if(btnTarjeta.isSelected()){
+        totalPorc = (valorTotal * 0.05) + valorTotal;
+        if (btnEfectivo.isSelected()) {
             seccionDatos.getChildren().clear();
-            Label lblTittular=new Label("Titular");
-            Label lblNumero=new Label("Número");
-            Label lblCaducidad=new Label("Caducidad");
-            Label lblCv=new Label("CVV");
-            TextField txtTi=new TextField();
-            TextField txtNum= new TextField();
-            TextField txtcad=new TextField();
-            TextField txtcv=new TextField();
+            Labeltxt.setText("Tendrá que pagar " + valorTotal + " dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
+            seccionDatos.getChildren().add(Labeltxt);
+        } else if (btnTarjeta.isSelected()) {
+            seccionDatos.getChildren().clear();
+            Label lblTittular = new Label("Titular");
+            Label lblNumero = new Label("Número");
+            Label lblCaducidad = new Label("Caducidad");
+            Label lblCv = new Label("CVV");
             GridPane.setConstraints(lblTittular, 0, 0);
             GridPane.setConstraints(lblNumero, 0, 1);
             GridPane.setConstraints(lblCaducidad, 0, 2);
@@ -102,17 +116,111 @@ public class VentanaPagoController implements Initializable {
             GridPane.setConstraints(txtNum, 1, 1);
             GridPane.setConstraints(txtcad, 1, 2);
             GridPane.setConstraints(txtcv, 1, 3);
-            
-            gdOpciones.getChildren().addAll(lblTittular,lblNumero,lblCaducidad,lblCv,txtTi,txtNum,txtcad,txtcv);
+
+            gdOpciones.getChildren().addAll(lblTittular, lblNumero, lblCaducidad, lblCv, txtTi, txtNum, txtcad, txtcv);
             gdOpciones.setVgap(20);
-            Labeltxt.setText("Tendrá que pagar un total de "+totalPorc+" dólares por el incremento \ndel 5% por uso de la tarjeta");
-            seccionDatos.getChildren().addAll(gdOpciones,Labeltxt);
+            Labeltxt.setText("Tendrá que pagar un total de " + totalPorc + " dólares por el incremento \ndel 5% por uso de la tarjeta");
+            seccionDatos.getChildren().addAll(gdOpciones, Labeltxt);
             seccionDatos.setSpacing(20);
         }
-    }   
+
+    }
+
+    @FXML
+    void MostrarFinal(ActionEvent e) {
+        if (btnIngresar.isPressed()) {
+            if (txtDireccion.getText().isEmpty()) {
+                Alert al = new Alert(AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Error: El campo de dirección se encuentra vacío");
+                al.setContentText("Ingrese un valor");
+            }
+            if ((!(btnEfectivo.isSelected())) && (!(btnTarjeta.isSelected()))) {
+                Alert al = new Alert(AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Error: No se ha seleccionado un método con que pagar");
+                al.setContentText("Seleccione un método para pagar");
+            }
+            if (btnTarjeta.isSelected()) {
+                if (txtTi.getText().equals("")) {
+                    Alert al = new Alert(AlertType.ERROR);
+                    al.setTitle("Error");
+                    al.setHeaderText("Error: El campo de titular se encuentra vacío");
+                    al.setContentText("Ingrese un valor");
+                }else if(txtNum.getText().equals("")){
+                    Alert al = new Alert(AlertType.ERROR);
+                    al.setTitle("Error");
+                    al.setHeaderText("Error: El campo del numero de tarjeta se encuentra vacío");
+                    al.setContentText("Ingrese un valor");
+                }else if(txtcad.getText().equals("")){
+                    Alert al = new Alert(AlertType.ERROR);
+                    al.setTitle("Error");
+                    al.setHeaderText("Error: El campo de caducidad se encuentra vacío");
+                    al.setContentText("Ingrese un valor");
+                }else if(txtcv.getText().equals("")){
+                    Alert al = new Alert(AlertType.ERROR);
+                    al.setTitle("Error");
+                    al.setHeaderText("Error: El campo de CVV se encuentra vacío");
+                    al.setContentText("Ingrese un valor");
+                }
+            }
+
+        }
+    }
+
+    public int crearCodigo() {
+        String opciones = "1234567890";
+        String cadena = "";
+        Random r = new Random();
+        for (int i = 0; i < 4; i++) {
+            int posicion = r.nextInt(opciones.length());
+            char caracter = opciones.charAt(posicion);
+            cadena += caracter;
+        }
+        int valor = Integer.parseInt(cadena);
+        return valor;
+
+    }
+
+    public ArrayList<Pedidos> leerPedido() {
+        ArrayList<Pedidos> ped = new ArrayList<>();
+        try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
+            String linea;
+            while ((linea = bfr.readLine()) != null) {
+                String[] lineas = linea.split(",");
+                Pedidos pedido = new Pedidos(Integer.parseInt(lineas[0]), lineas[1], Double.parseDouble(lineas[2]));
+                ped.add(pedido);
+            }
+        } catch (IOException e) {
+            e.getMessage();
+            return null;
+        }
+        return ped;
+    }
+
+    void ingresardatos() {
+
+        try ( BufferedWriter bf = new BufferedWriter(new FileWriter("pagos.txt"))) {
+            ped = leerPedido();
+            if (btnEfectivo.isSelected()) {
+                tipo = "E";
+            } else if (btnTarjeta.isSelected()) {
+                tipo = "C";
+            }
+            Date today = Calendar.getInstance().getTime();
+            for (Pedidos p : ped) {
+                cod = p.getIdPedido();
+                nom = p.getNombreCliente();
+            }
+            bf.write(crearCodigo() + "," + cod + "," + totalPorc + "," + today + "," + tipo);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
 
     public void closeWindows() {
         try {
+
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
 
             Parent root = loader.load();
@@ -127,4 +235,5 @@ public class VentanaPagoController implements Initializable {
             ex.printStackTrace();
         }
     }
+
 }

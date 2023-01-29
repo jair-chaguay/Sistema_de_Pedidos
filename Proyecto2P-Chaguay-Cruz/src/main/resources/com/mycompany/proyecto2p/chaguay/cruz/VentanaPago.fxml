@@ -30,7 +30,7 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="351.0" />
+            <TextField fx:id="txtDireccion" prefHeight="25.0" prefWidth="351.0" />
          </children>
       </HBox>
       <Label text="Detalle  de pago" textFill="#e89300">
@@ -79,7 +79,7 @@
       </VBox>
       <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button fx:id="btnIngresar" mnemonicParsing="false" style="-fx-background-color: ffbb44;" text="Continuar">
+            <Button fx:id="btnIngresar" mnemonicParsing="false" onAction="#MostrarFinal" style="-fx-background-color: ffbb44;" text="Continuar">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
