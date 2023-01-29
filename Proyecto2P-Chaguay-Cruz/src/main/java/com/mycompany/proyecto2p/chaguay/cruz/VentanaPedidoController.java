@@ -7,6 +7,7 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 import static com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController.usuariosI;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedidos;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.ValorInsuficienteException;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.tipoAlimento;
@@ -51,6 +52,7 @@ public class VentanaPedidoController implements Initializable {
 
     static ArrayList<Menu> menulista = new ArrayList<>();
     static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    static ArrayList<Pedidos> listPed=new ArrayList<>();
     double total;
     double totalIVA;
     String cliente;
@@ -358,6 +360,24 @@ public class VentanaPedidoController implements Initializable {
         return valor;
 
     }
+    
+    public ArrayList<Pedidos> leerPedido(){
+        ArrayList<Pedidos> ped=new ArrayList<>();
+        try(BufferedReader bfr= new BufferedReader(new FileReader("Pedidos.txt",StandardCharsets.UTF_8))){
+            String linea;
+            while((linea=bfr.readLine())!=null){
+                String[] lineas=linea.split(",");
+                Pedidos pedido=new Pedidos(Integer.parseInt(lineas[0]),lineas[1],Double.parseDouble(lineas[2]));
+                ped.add(pedido);
+            }
+        }catch(IOException e){
+            e.getMessage();
+            return null;
+        }
+        return ped;
+    }
+    
+    
 
     @FXML
     void limpiar(ActionEvent ev) {
