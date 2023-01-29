@@ -20,6 +20,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -142,6 +143,14 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
+        if(opcion.equals("Precio")){
+            Collections.sort(listaPedidos);
+            mostrarEscogidos();
+        
+        
+        }else if(opcion.equals("Nombre")){
+            
+        }
 
     }
 

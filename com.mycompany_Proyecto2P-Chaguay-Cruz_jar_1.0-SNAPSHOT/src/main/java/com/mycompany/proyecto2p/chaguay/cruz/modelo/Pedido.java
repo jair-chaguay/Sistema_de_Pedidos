@@ -8,12 +8,24 @@ package com.mycompany.proyecto2p.chaguay.cruz.modelo;
  *
  * @author mcruz
  */
-public class Pedido {
+public class Pedido implements Comparable<Pedido>{
     
     private String descripcion;
     private int cantidad; //cantidad de comida escogida
     private String nombreCliente;
     private double valor;
+    
+    @Override
+    public int compareTo(Pedido p){
+        if(this.valor<p.getValor()){
+            return -1;
+        }else if(this.valor>p.getValor()){
+            return 1;
+        
+        }else
+            return 0;
+    
+    }
 
     public Pedido( String descripcion,int cantidad, String nombreCliente, double valor) {
         this.descripcion=descripcion;
