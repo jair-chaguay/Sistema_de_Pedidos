@@ -6,6 +6,7 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 
 import static com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController.usuariosI;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.NombreComparator;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedidos;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
@@ -143,13 +144,30 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
-        if(opcion.equals("Precio")){
+        if (opcion.equals("Precio")) {
+            gridPedido.getChildren().clear();
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
             Collections.sort(listaPedidos);
-            mostrarEscogidos();
-        
-        
-        }else if(opcion.equals("Nombre")){
-            
+//            mostrarEscogidos();
+
+        } else if (opcion.equals("Nombre")) {
+            gridPedido.getChildren().clear();
+            Label lblDescrp = new Label("Descripcion");
+            Label lblPrecio = new Label("Precio");
+            Label lblCantidad = new Label("Cantidad");
+            GridPane.setConstraints(lblDescrp, 0, 0);
+            GridPane.setConstraints(lblPrecio, 1, 0);
+            GridPane.setConstraints(lblCantidad, 2, 0);
+            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+            Collections.sort(listaPedidos, new NombreComparator());
+//            mostrarEscogidos();
+
         }
 
     }
@@ -354,28 +372,26 @@ public class VentanaPedidoController implements Initializable {
 //        }
 //    }
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
-        double valorTotal=0;
+        double valorTotal = 0;
         for (Pedido p : listaPedido) {
-            valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
+            valorTotal += p.valorTotal() + (p.valorTotal() * 0.12);
         }
-            
-            
 
-            try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
 
-                bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal+";");
-                bw.newLine();
+            bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal + ";");
+            bw.newLine();
 
-            } catch (IOException ioe) {
-                System.out.println("Se ha registrado un error al registrar el pedido!");
+        } catch (IOException ioe) {
+            System.out.println("Se ha registrado un error al registrar el pedido!");
 
-                Alert alerta = new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("Error de Registro");
-                alerta.setHeaderText("No ha sido posible registrar este pedido");
-                alerta.showAndWait();
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error de Registro");
+            alerta.setHeaderText("No ha sido posible registrar este pedido");
+            alerta.showAndWait();
 
-            }
-        
+        }
+
     }
     //METODO PARA CREAR ID PEDIDO
 
@@ -436,7 +452,6 @@ public class VentanaPedidoController implements Initializable {
         lblSubtotal.setText("0.00");
         lblIva.setText("0.00");
         lblTotal.setText("0.00");
-        
 
     }
 
