@@ -75,7 +75,7 @@ public class VentanaPagoController implements Initializable {
             }
         
         if(btnEfectivo.isSelected()){
-            Labeltxt.setText("Tendrá que pagar " +total+ "dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
+            Labeltxt.setText("Tendrá que pagar " +totalIVA+ "dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
         }else if(btnTarjeta.isSelected()){
             Label lblTittular=new Label("Titular");
             Label lblNumero=new Label("Número");

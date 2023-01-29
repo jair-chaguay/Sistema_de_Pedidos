@@ -403,7 +403,7 @@ public class VentanaPedidoController implements Initializable {
     
      public void closeWindows() {
             try{
-            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
             
             Parent root = loader.load();
             VentanaPagoController controlador=loader.getController();
