@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +33,8 @@ import javafx.stage.Stage;
  */
 public class VentanaPagoController implements Initializable {
 
+    
+    
     @FXML
     private Button btnIngresar;
 
@@ -40,6 +46,12 @@ public class VentanaPagoController implements Initializable {
     
     @FXML
     private GridPane gdOpciones;
+    
+    @FXML
+    private ToggleGroup opcionesPago;
+    @FXML
+    private Label Labeltxt;
+    
            
     
     double total;
@@ -50,34 +62,40 @@ public class VentanaPagoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        escogerOpcion();
-        
-
+        Labeltxt.setText("");                
         // TODO
     }
 
-    public void escogerOpcion() {
+    @FXML
+    void opcionEscogida(ActionEvent e){
         for (Pedido p : VentanaPedidoController.listaPedidos) {
                 total=p.getValor();
                 totalIVA = (total + (total * 0.12))/2;
                 
             }
-        btnTarjeta.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                Label lblPrecio=new Label("Su valor a pagar es de: "+totalIVA+"  dolares");
-                Label lblMensaje=new Label("Asegurese de tener el dinero completo por si el repartidor no tiene cambio");
-                 GridPane.setConstraints(lblPrecio, 0, 0);
-                 GridPane.setConstraints(lblMensaje, 0,1);
-                 
-                 gdOpciones.getChildren().addAll(lblPrecio,lblMensaje);
-                
-                
-
-            }
-
-        });
-    }
+        
+        if(btnEfectivo.isSelected()){
+            Labeltxt.setText("Tendrá que pagar " +total+ "dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
+        }else if(btnTarjeta.isSelected()){
+            Label lblTittular=new Label("Titular");
+            Label lblNumero=new Label("Número");
+            Label lblCaducidad=new Label("Caducidad");
+            Label lblCv=new Label("CVV");
+            TextField txtTi=new TextField();
+            TextField txtNum= new TextField();
+            TextField txtcad=new TextField();
+            TextField txtcv=new TextField();
+            GridPane.setConstraints(lblTittular, 0, 0);
+            GridPane.setConstraints(lblNumero, 0, 1);
+            GridPane.setConstraints(lblCaducidad, 0, 2);
+            GridPane.setConstraints(lblCv, 0, 3);
+            GridPane.setConstraints(txtTi, 1, 0);
+            GridPane.setConstraints(txtNum, 1, 1);
+            GridPane.setConstraints(txtcad, 1, 2);
+            GridPane.setConstraints(txtcv, 1, 3);
+            
+        }
+    }   
 
     public void closeWindows() {
         try {

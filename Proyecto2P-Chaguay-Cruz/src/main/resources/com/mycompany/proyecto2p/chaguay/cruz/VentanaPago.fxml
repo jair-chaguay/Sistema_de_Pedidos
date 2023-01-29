@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -42,8 +43,11 @@
       </Label>
       <HBox prefHeight="44.0" prefWidth="600.0" spacing="40.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Efectivo" />
-            <RadioButton mnemonicParsing="false" text="Tarjeta de crédito" />
+            <RadioButton fx:id="btnEfectivo" mnemonicParsing="false" onAction="#opcionEscogida" text="Efectivo">
+               <toggleGroup>
+                  <ToggleGroup fx:id="opcionesPago" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="btnTarjeta" mnemonicParsing="false" onAction="#opcionEscogida" text="Tarjeta de crédito" toggleGroup="$opcionesPago" />
          </children>
          <VBox.margin>
             <Insets left="35.0" />
@@ -63,7 +67,7 @@
       </GridPane>
       <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="600.0">
          <children>
-            <Label text="Label" />
+            <Label fx:id="Labeltxt" text="Label" />
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="600.0" spacing="30.0">
