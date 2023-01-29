@@ -12,9 +12,11 @@ import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.ValorInsuficienteException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class VentanaPedidoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        
         menulista = leerArchivo();
         try {
             cargarCombo();
@@ -374,6 +377,19 @@ public class VentanaPedidoController implements Initializable {
             return null;
         }
         return ped;
+    }
+    
+    void serializar(){
+        listPed=leerPedido();
+        for(Pedidos li:listPed){
+            try(ObjectOutputStream obj=new ObjectOutputStream(new FileOutputStream("pedido"+li.getIdPedido()+".bin"))){
+                obj.writeObject(listPed);
+                
+            }catch(IOException e){
+                
+            }
+
+        }
     }
     
     

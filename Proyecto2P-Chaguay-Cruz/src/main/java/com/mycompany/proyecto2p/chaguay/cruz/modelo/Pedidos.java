@@ -4,11 +4,18 @@
  */
 package com.mycompany.proyecto2p.chaguay.cruz.modelo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 /**
  *
  * @author HP
  */
-public class Pedidos {
+public class Pedidos implements Serializable{
     int idPedido;
     String nombreCliente;
     double total;
@@ -41,4 +48,7 @@ public class Pedidos {
     public void setTotal(double total) {
         this.total = total;
     }
+    
+    
+    
 }
