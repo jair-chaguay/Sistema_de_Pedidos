@@ -310,7 +310,7 @@ public class VentanaPedidoController implements Initializable {
             Parent root = loader.load();
 
             VentanaPagoController controlador = loader.getController();
-            Scene scene = new Scene(root, 640, 500);
+            Scene scene = new Scene(root, 640, 600);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();

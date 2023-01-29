@@ -45,6 +45,8 @@ public class VentanaPagoController implements Initializable {
     private RadioButton btnTarjeta;
     
     @FXML
+    private VBox seccionDatos;
+    @FXML
     private GridPane gdOpciones;
     
     @FXML
@@ -57,6 +59,7 @@ public class VentanaPagoController implements Initializable {
     double total;
     double totalIVA;
     
+    double totalPorc;
     
     
 
@@ -75,10 +78,14 @@ public class VentanaPagoController implements Initializable {
             
             valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
         }
+        totalPorc=(valorTotal*0.05)+valorTotal;
         
         if(btnEfectivo.isSelected()){
+            seccionDatos.getChildren().clear();           
             Labeltxt.setText("Tendrá que pagar " +valorTotal+ " dólares.\n Aségurese de tener el dinero completo por si el repartidor no tiene cambio.");
+            seccionDatos.getChildren().add(Labeltxt);
         }else if(btnTarjeta.isSelected()){
+            seccionDatos.getChildren().clear();
             Label lblTittular=new Label("Titular");
             Label lblNumero=new Label("Número");
             Label lblCaducidad=new Label("Caducidad");
@@ -96,6 +103,11 @@ public class VentanaPagoController implements Initializable {
             GridPane.setConstraints(txtcad, 1, 2);
             GridPane.setConstraints(txtcv, 1, 3);
             
+            gdOpciones.getChildren().addAll(lblTittular,lblNumero,lblCaducidad,lblCv,txtTi,txtNum,txtcad,txtcv);
+            gdOpciones.setVgap(20);
+            Labeltxt.setText("Tendrá que pagar un total de "+totalPorc+" dólares por el incremento \ndel 5% por uso de la tarjeta");
+            seccionDatos.getChildren().addAll(gdOpciones,Labeltxt);
+            seccionDatos.setSpacing(20);
         }
     }   
 
