@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
@@ -22,39 +23,69 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-
 /**
  *
  * @author mcruz
  */
 public class VentanaFinalController implements Initializable {
 
-   @FXML
-   private VBox rootFinal;
-   
-   @FXML
-   private ImageView imgg;
-   
-   @FXML
-   private Label lblPedido;
+    @FXML
+    private VBox rootFinal;
 
-   ArrayList<Pedidos> p=new ArrayList<>();
-   String numeroPedido;
+    @FXML
+    private ImageView imgg;
+
+    @FXML
+    private Label lblPedido;
+
+    @FXML
+    private Label cerrar;
+
+    ArrayList<Pedidos> p = new ArrayList<>();
+    String numeroPedido;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         settearText();
         cargarImg();
+        
+        Thread t1 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            for (int i = 5; i >= 0; i--) {
+                int contador = i;
+                String finish = "La ventana se cerrara en " + i + " segundos";
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+
+                }
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run(){
+                        cerrar.setText(finish);
+                        if(contador==0){
+                            Platform.exit();
+                        }
+                    }
+                });
+                
+            }
+        }
+    });
+          t1.start();
+
     }
-    
-    void cargarImg(){
-        try(FileInputStream input=new FileInputStream(Principal.pathImages+"Delivery.png")){
-            Image img=new Image(input);
+
+    void cargarImg() {
+        try ( FileInputStream input = new FileInputStream(Principal.pathImages + "Delivery.png")) {
+            Image img = new Image(input);
             imgg.setImage(img);
-        }catch(IOException e){
+        } catch (IOException e) {
             e.getMessage();
         }
     }
-    
+
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
@@ -70,13 +101,16 @@ public class VentanaFinalController implements Initializable {
         }
         return ped;
     }
-    
-    void settearText(){
-        p=leerPedido();
-        for(Pedidos pedido:p){
-            numeroPedido=String.valueOf(pedido.getIdPedido());
+
+    void settearText() {
+        p = leerPedido();
+        for (Pedidos pedido : p) {
+            numeroPedido = String.valueOf(pedido.getIdPedido());
         }
-        String set="Su pedido Nro"+numeroPedido+"ha sido pegado y empezaremos a prepararlo";
+        String set = "Su pedido Nro" + numeroPedido + "ha sido pegado y empezaremos a prepararlo";
         lblPedido.setText(set);
     }
+
+    
+    
 }

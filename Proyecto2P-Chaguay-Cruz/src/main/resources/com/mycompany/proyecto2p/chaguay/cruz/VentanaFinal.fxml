@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -32,5 +33,14 @@
          </font>
       </Label>
       <ImageView fx:id="imgg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane prefHeight="99.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="cerrar" layoutX="518.0" layoutY="50.0" text="Label" textFill="#797979">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </VBox>
