@@ -20,6 +20,8 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -142,6 +144,36 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
+        gridPedido.getChildren().clear();
+        Thread orden=new Thread(new Runnable(){
+            @Override
+            public void run(){
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run(){
+                        if(opcion.equals("Precio")){
+                            Collections.sort(listaPedidos, new Comparator<Pedido>(){
+                                public int compare(Pedido p1, Pedido p2){
+                                    return Double.compare(p1.valorTotal(), p2.valorTotal());
+                                }
+                                
+                            });
+                            mostrarEscogidos();
+                        
+                        
+                        }else if(opcion.equals("Nombre")){
+                            Collections.sort(listaPedidos,new Comparator<Pedido>(){
+                               public int compare(Pedido p1,Pedido p2) {
+                                   return p1.getDescripcion().compareTo(p2.getDescripcion());
+                               }
+                            });
+                            mostrarEscogidos();
+                        }
+                    }
+                });
+            }
+        });
+        orden.start();
 
     }
 
@@ -301,6 +333,7 @@ public class VentanaPedidoController implements Initializable {
     void contPago(ActionEvent e) throws IOException {
         mostrarVentana(e);
         registrarPedido(listaPedidos);
+        serializar(listPed);
 
     }
 
@@ -322,28 +355,7 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
-//    public void registrarPedido(ArrayList<Pedido> listaPedido) {
-//            for (Pedido p : listaPedido) {
-//                total += p.getValor();
-//                totalIVA = (total + (total * 0.12))/2;
-//                cliente=p.getNombreCliente();
-//                
-//            }
-//        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt",true))) {
-//            
-//            
-//                bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
-//            
-//        } catch (IOException ioe) {
-//            System.out.println("Se ha registrado un error al registrar el pedido!");
-//
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("Error de Registro");
-//            alerta.setHeaderText("No ha sido posible registrar este pedido");
-//            alerta.showAndWait();
-//
-//        }
-//    }
+
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
         double valorTotal=0;
         for (Pedido p : listaPedido) {
@@ -352,7 +364,7 @@ public class VentanaPedidoController implements Initializable {
             
             
 
-            try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
+            try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
 
                 bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal);
                 bw.newLine();
@@ -400,11 +412,11 @@ public class VentanaPedidoController implements Initializable {
         return ped;
     }
 
-    void serializar() {
-        listPed = leerPedido();
-        for (Pedidos li : listPed) {
+    void serializar(ArrayList<Pedidos> pedidolist) {        
+        for (Pedidos li : pedidolist) {
+            
             try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + li.getIdPedido() + ".bin"))) {
-                obj.writeObject(listPed);
+                obj.writeObject(pedidolist);
 
             } catch (IOException e) {
 
@@ -415,7 +427,11 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     void limpiar(ActionEvent ev) {
-        listaPedidos.clear();
+       gridOpciones.getChildren().clear();
+        gridPedido.getChildren().clear();
+        listaPedidos.clear();        
+        lblTotal.setText("0.0");
+        lblSubtotal.setText("0.0");
 
     }
 
