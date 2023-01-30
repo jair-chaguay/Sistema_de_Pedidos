@@ -72,6 +72,7 @@ public class VentanaPedidoController implements Initializable {
         try {
             cargarCombo();
             cargarCombo2();
+            serializar(listPed);
 
         } catch (IOException ex) {
             ex.printStackTrace();
