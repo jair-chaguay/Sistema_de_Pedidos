@@ -84,7 +84,11 @@ public class VentanaSistemaController implements Initializable {
 
     @FXML
     private ImageView Imagehmbrg;
-
+/**
+ * 
+ * @param ae
+ * @throws IOException 
+ */
     @FXML
     void IngresarOptions(ActionEvent ae) throws IOException {
         String user = txtUsuario.getText();
@@ -103,7 +107,11 @@ public class VentanaSistemaController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ * @param ae
+ * @throws IOException 
+ */
     void VistaOpciones(ActionEvent ae) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaOpciones.fxml"));
         Parent root = loader.load();
@@ -117,7 +125,12 @@ public class VentanaSistemaController implements Initializable {
         stage.setOnCloseRequest(e -> controlador.closeWindows());
         
     }
-
+/**
+ * 
+ * @param usuario
+ * @param contrasena
+ * @return 
+ */
     public boolean verificacionUsuario(String usuario, String contrasena) {
         ArrayList<String[]> parametros = new ArrayList<>();
 
@@ -145,7 +158,11 @@ public class VentanaSistemaController implements Initializable {
         }
         return false;
     }
-    
+    /**
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -37,13 +37,19 @@ public class VentanaMapaController implements Initializable {
 
     @FXML
     private Pane rootPane;
-
+/**
+ * 
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         local = Locales.leerLocales();
         agregarImgview();
     }
-
+    /**
+     * 
+     */
     void agregarImgview() {
 
         rootPane.getChildren().clear();

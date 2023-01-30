@@ -8,12 +8,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author HP
+ */
 public class Principal extends Application{
     private static Scene scene;
     public static String pathFiles="src/main/resources/Files/";
     public static String pathImages="src/main/resources/styles/";
-    
+   /**
+    * 
+    * @param s
+    * @throws IOException 
+    */ 
     @Override
     public void start(Stage s) throws IOException{
         FXMLLoader fxmlloader= new FXMLLoader(Principal.class.getResource("VentanaSistema.fxml"));
@@ -28,7 +35,8 @@ public class Principal extends Application{
         
     }
     /**
-     * @param args the command line arguments
+     * 
+     * @param args 
      */
     public static void main(String[] args) {
         // TODO code application logic here

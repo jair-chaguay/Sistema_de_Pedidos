@@ -86,14 +86,21 @@ public class VentanaPagoController implements Initializable {
     TextField txtNum;
     TextField txtcad;
     TextField txtcv;
-
+/**
+ * 
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Labeltxt.setText("");
 
         // TODO
     }
-
+/**
+ * 
+ * @param e 
+ */
     @FXML
     void opcionEscogida(ActionEvent e) {
 
@@ -136,7 +143,10 @@ public class VentanaPagoController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ * @param e 
+ */
     @FXML
     void MostrarFinal(ActionEvent e) {
 
@@ -191,7 +201,11 @@ public class VentanaPagoController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ * @param a
+ * @throws IOException 
+ */
     void MostrarVentana(ActionEvent a) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaFinal.fxml"));
         try {
@@ -208,7 +222,10 @@ public class VentanaPagoController implements Initializable {
             ex.getMessage();
         }
     }
-
+/**
+ * 
+ * @return 
+ */
     public int crearCodigo() {
         String opciones = "1234567890";
         String cadena = "";
@@ -222,7 +239,10 @@ public class VentanaPagoController implements Initializable {
         return valor;
 
     }
-
+/**
+ * 
+ * @return 
+ */
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
@@ -238,7 +258,9 @@ public class VentanaPagoController implements Initializable {
         }
         return ped;
     }
-
+/**
+ * 
+ */
     void ingresardatos() {
 
         try ( BufferedWriter bf = new BufferedWriter(new FileWriter("pagos.txt"))) {
@@ -258,7 +280,9 @@ public class VentanaPagoController implements Initializable {
             e.getMessage();
         }
     }
-
+/**
+ * 
+ */
     public void closeWindows() {
         try {
 
@@ -276,7 +300,10 @@ public class VentanaPagoController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+   /**
+    * 
+    * @param e 
+    */ 
     @FXML
     void limpiar(ActionEvent e){
         txtDireccion.setText("");

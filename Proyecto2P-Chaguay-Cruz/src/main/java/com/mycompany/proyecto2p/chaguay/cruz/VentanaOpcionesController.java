@@ -35,6 +35,11 @@ public class VentanaOpcionesController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    /**
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -56,7 +61,10 @@ public class VentanaOpcionesController implements Initializable {
     @FXML
     private Label LblUsuario;  
     
-    
+    /**
+     * 
+     * @param e 
+     */
     @FXML
     void localcercano(ActionEvent e){
                 
@@ -72,6 +80,10 @@ public class VentanaOpcionesController implements Initializable {
         }
    
     }
+    /**
+     * 
+     * @param evt 
+     */
     @FXML
     void hazPedido(ActionEvent evt){
         try {
@@ -90,7 +102,9 @@ public class VentanaOpcionesController implements Initializable {
     }
 
     
-    
+   /**
+    * 
+    */ 
     public void closeWindows() {
        
         try {
@@ -108,7 +122,10 @@ public class VentanaOpcionesController implements Initializable {
         }
         
     }
-    
+    /**
+     * 
+     * @param txt 
+     */
     void init(Usuario txt){
         LblUsuario.setText("Bienvenid@ " +txt.getNameApellido());
         

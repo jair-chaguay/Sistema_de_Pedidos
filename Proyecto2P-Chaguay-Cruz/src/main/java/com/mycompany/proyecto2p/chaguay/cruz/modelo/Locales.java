@@ -21,7 +21,14 @@ public class Locales {
     String horario;
     double coordX;
     double coordY;
-    
+    /**
+     * 
+     * @param nombre
+     * @param direccion
+     * @param horario
+     * @param coordX
+     * @param coordY 
+     */
     public Locales(String nombre, String direccion, String horario, double coordX, double coordY){
         this.nombre=nombre;
         this.direccion=direccion;
@@ -29,43 +36,73 @@ public class Locales {
         this.coordX=coordX;
         this.coordY=coordY;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public String getNombre(){
     return nombre;
     }   
-    
+    /**
+     * 
+     * @param nombre 
+     */
     public void setNombre(String nombre){
         this.nombre=nombre;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public String getDireccion(){
         return direccion;
     }
-    
+    /**
+     * 
+     * @param direccion 
+     */
     public void setDireccion(String direccion){
         this.direccion=direccion;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public String getHorario(){
         return horario;
     }
-    
+    /**
+     * 
+     * @param horario 
+     */
     public void setHorario(String horario){
         this.horario=horario;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public double getCoordX(){
         return coordX;
     }
-    
+    /**
+     * 
+     * @param coordX 
+     */
     public void setCoordX(double coordX){
         this.coordX=coordX;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public double getCoordY(){
         return coordY;
     }
-    
+    /**
+     * 
+     * @param coordY 
+     */
     public void setCoordY(double coordY){
         this.coordY=coordY;
     }

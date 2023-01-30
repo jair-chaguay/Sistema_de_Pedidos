@@ -44,7 +44,11 @@ public class VentanaFinalController implements Initializable {
 
     ArrayList<Pedidos> p = new ArrayList<>();
     String numeroPedido;
-
+/**
+ * 
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         p=leerPedido();
@@ -52,7 +56,10 @@ public class VentanaFinalController implements Initializable {
  
     }
 
-
+/**
+ * 
+ * @return 
+ */
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
@@ -68,7 +75,10 @@ public class VentanaFinalController implements Initializable {
         }
         return ped;
     }
-
+/**
+ * 
+ * @param labelCont 
+ */
   public void crearThreadNuevaVentana(Label labelCont) {
         Thread t2 = new Thread(new Runnable() {
             @Override

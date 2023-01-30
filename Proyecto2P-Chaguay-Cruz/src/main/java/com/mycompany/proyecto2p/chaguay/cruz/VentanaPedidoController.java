@@ -51,6 +51,7 @@ import javafx.stage.Stage;
  *
  * @author mcruz
  */
+
 public class VentanaPedidoController implements Initializable {
 
     static ArrayList<Menu> menulista = new ArrayList<>();
@@ -59,7 +60,11 @@ public class VentanaPedidoController implements Initializable {
     double total;
     double totalIVA;
     String cliente;
-
+/**
+ * 
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -105,7 +110,10 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private Label lblMensaje;
-
+/**
+ * 
+ * @return 
+ */
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Menu.txt", StandardCharsets.UTF_8))) {
@@ -122,7 +130,10 @@ public class VentanaPedidoController implements Initializable {
         }
         return menulista;
     }
-
+/**
+ * 
+ * @throws IOException 
+ */
     void cargarCombo() throws IOException {
         ArrayList<String> tipos = new ArrayList<>();
         tipos.add("Platos Fuertes");
@@ -132,7 +143,10 @@ public class VentanaPedidoController implements Initializable {
         cbxmenu.getItems().setAll(tipos);
 
     }
-
+/**
+ * 
+ * @throws IOException 
+ */
     void cargarCombo2() throws IOException {
         ArrayList<String> ordenar = new ArrayList<>();
         ordenar.add("Precio");
@@ -140,7 +154,10 @@ public class VentanaPedidoController implements Initializable {
         cbxordenar.getItems().setAll(ordenar);
 
     }
-
+/**
+ * 
+ * @param e 
+ */
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
@@ -176,7 +193,11 @@ public class VentanaPedidoController implements Initializable {
         orden.start();
 
     }
-
+/**
+ * 
+ * @param e
+ * @throws ValorInsuficienteException 
+ */
     @FXML
     void comboEvents(ActionEvent e) throws ValorInsuficienteException {
 
@@ -236,7 +257,11 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ * @param tipo
+ * @throws ValorInsuficienteException 
+ */
     public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
             Menu menu = menulista.get(i);
@@ -285,7 +310,12 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ * @param cantidad
+ * @param text
+ * @throws ValorInsuficienteException 
+ */
     static void valorErroneo(String cantidad, TextField text) throws ValorInsuficienteException {
         if (Integer.parseInt(cantidad) == 0 || text == null) {
             throw new ValorInsuficienteException("Ingresar un número válido");
@@ -293,7 +323,9 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-
+/**
+ * 
+ */
     public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
 
@@ -328,7 +360,11 @@ public class VentanaPedidoController implements Initializable {
         });
 
     }
-
+/**
+ * 
+ * @param e
+ * @throws IOException 
+ */
     @FXML
     void contPago(ActionEvent e) throws IOException {
         mostrarVentana(e);
@@ -336,7 +372,11 @@ public class VentanaPedidoController implements Initializable {
         serializar(listPed);
 
     }
-
+/**
+ * 
+ * @param ae
+ * @throws IOException 
+ */
     void mostrarVentana(ActionEvent ae) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
         try {
@@ -355,7 +395,10 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
-
+/**
+ * 
+ * @param listaPedido 
+ */
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
         double valorTotal=0;
         for (Pedido p : listaPedido) {
@@ -381,7 +424,10 @@ public class VentanaPedidoController implements Initializable {
         
     }
     //METODO PARA CREAR ID PEDIDO
-
+/**
+ * 
+ * @return 
+ */
     public int crearCodigo() {
         String opciones = "1234567890";
         String cadena = "";
@@ -395,7 +441,10 @@ public class VentanaPedidoController implements Initializable {
         return valor;
 
     }
-
+/**
+ * 
+ * @return 
+ */
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
@@ -411,7 +460,10 @@ public class VentanaPedidoController implements Initializable {
         }
         return ped;
     }
-
+/**
+ * 
+ * @param pedidolist 
+ */
     void serializar(ArrayList<Pedidos> pedidolist) {        
         for (Pedidos li : pedidolist) {
             
@@ -424,7 +476,10 @@ public class VentanaPedidoController implements Initializable {
 
         }
     }
-
+/**
+ * 
+ * @param ev 
+ */
     @FXML
     void limpiar(ActionEvent ev) {
        gridOpciones.getChildren().clear();
@@ -434,7 +489,9 @@ public class VentanaPedidoController implements Initializable {
         lblSubtotal.setText("0.0");
 
     }
-
+/**
+ * 
+ */
     public void closeWindows() {
         try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
