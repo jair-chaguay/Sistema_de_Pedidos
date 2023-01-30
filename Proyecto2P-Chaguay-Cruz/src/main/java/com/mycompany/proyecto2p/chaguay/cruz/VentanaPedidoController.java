@@ -72,7 +72,7 @@ public class VentanaPedidoController implements Initializable {
         try {
             cargarCombo();
             cargarCombo2();
-            serializar(listPed);
+            serializar(listaPedidos);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -378,7 +378,7 @@ public class VentanaPedidoController implements Initializable {
     void contPago(ActionEvent e) throws IOException {
         mostrarVentana(e);
         registrarPedido(listaPedidos);
-        serializar(listPed);
+        serializar(listaPedidos);
 
     }
 
@@ -475,11 +475,11 @@ public class VentanaPedidoController implements Initializable {
      *
      * @param pedidolist
      */
-    void serializar(ArrayList<Pedidos> pedidolist) {
-        for (Pedidos li : pedidolist) {
+    void serializar(ArrayList<Pedido> ListaPedidos) {
+        for (Pedidos li : listPed) {
 
-            try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + li.getIdPedido() + ".bin"))) {
-                obj.writeObject(pedidolist);
+            try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + li.getIdPedido()))) {
+                obj.writeObject(ListaPedidos);
 
             } catch (IOException e) {
 
