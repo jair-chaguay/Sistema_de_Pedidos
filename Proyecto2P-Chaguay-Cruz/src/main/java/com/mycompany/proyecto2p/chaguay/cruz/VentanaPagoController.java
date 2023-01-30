@@ -69,7 +69,13 @@ public class VentanaPagoController implements Initializable {
     private ToggleGroup opcionesPago;
     @FXML
     private Label Labeltxt;
+    
+    @FXML
+    private Button btnLimpiar;
+            
 
+    @FXML 
+    private VBox rootFinal;
     String tipo;
     String nom;
     double total;
@@ -270,5 +276,16 @@ public class VentanaPagoController implements Initializable {
             ex.printStackTrace();
         }
     }
+    
+    @FXML
+    void limpiar(ActionEvent e){
+        txtDireccion.setText("");
+        txtTi.setText("");
+            txtNum.setText("");
+            txtcad.setText("");
+            txtcv.setText("");
+            btnEfectivo.setSelected(false);
+            btnTarjeta.setSelected(false);
 
+}
 }

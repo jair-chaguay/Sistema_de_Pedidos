@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -47,34 +48,8 @@ public class VentanaFinalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         p=leerPedido();
-        settearText(lblPedido);
-        
-        Thread t1 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            for (int i = 5; i >= 0; i--) {
-                int contador = i;
-                String finish = "La ventana se cerrara en " + i + " segundos";
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-
-                }
-                Platform.runLater(new Runnable(){
-                    @Override
-                    public void run(){
-                        cerrar.setText(finish);
-                        if(contador==0){
-                            Platform.exit();
-                        }
-                    }
-                });
-                
-            }
-        }
-    });
-          t1.start();
-
+        crearThreadNuevaVentana(cerrar);
+ 
     }
 
 
@@ -94,14 +69,31 @@ public class VentanaFinalController implements Initializable {
         return ped;
     }
 
-    void settearText(Label l) {       
-        for (Pedidos pedido : p) {
-            numeroPedido = String.valueOf(pedido.getIdPedido());
-        }
-        String set = "Su pedido Nro" + numeroPedido + "ha sido pegado y empezaremos a prepararlo";
-        l.setText(set);
-    }
+  public void crearThreadNuevaVentana(Label labelCont) {
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 5; i > -1; i--) {
+                    String mensaje = "Cerrando en " + i + ".....";
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            labelCont.setText(mensaje);
+                        }
+                    });
+                    try {
+                        Thread.sleep(1000);
 
+                    } catch (InterruptedException ex) {
+                    }
+                }
+                Stage stage = (Stage) rootFinal.getScene().getWindow();
+                Platform.runLater(() -> stage.close());
+            }
+        });
+        t2.start();
+
+    }
     
     
 }
