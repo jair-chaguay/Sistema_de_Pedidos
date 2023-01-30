@@ -48,7 +48,9 @@ public class VentanaPagoController implements Initializable {
     ArrayList<Pedidos> ped = new ArrayList<>();
     int cod;
 
-  
+    @FXML
+    private Button btnIngresar;
+
     @FXML
     private TextField txtDireccion;
 
@@ -70,9 +72,6 @@ public class VentanaPagoController implements Initializable {
     
     @FXML
     private Button btnLimpiar;
-    
-    @FXML
-    private Button btnContinuar;
             
 
     @FXML 
@@ -199,6 +198,13 @@ public class VentanaPagoController implements Initializable {
 
             }
 
+        }else{
+            try {
+                    MostrarVentana(e);
+                } catch (IOException ex) {
+
+                }
+                ingresardatos();
         }
 
     }
@@ -217,7 +223,7 @@ public class VentanaPagoController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-            Stage myStage = (Stage) this.btnContinuar.getScene().getWindow();
+            Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
             myStage.close();
         } catch (IOException ex) {
             ex.getMessage();
@@ -294,7 +300,7 @@ public class VentanaPagoController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-            Stage myStage = (Stage) this.btnContinuar.getScene().getWindow();
+            Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
             myStage.close();
 
         } catch (IOException ex) {

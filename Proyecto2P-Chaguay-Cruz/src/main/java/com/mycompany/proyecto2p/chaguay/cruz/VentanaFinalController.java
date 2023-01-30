@@ -16,8 +16,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +45,8 @@ public class VentanaFinalController implements Initializable {
 
     @FXML
     private Label cerrar;
+    
+    private Button btnCerrar;
 
     ArrayList<Pedidos> p = new ArrayList<>();
     String numeroPedido;
@@ -52,6 +58,7 @@ public class VentanaFinalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         p=leerPedido();
+        cargarImg(imgg);
         crearThreadNuevaVentana(cerrar);
  
     }
@@ -104,6 +111,33 @@ public class VentanaFinalController implements Initializable {
         t2.start();
 
     }
+  
+  void cargarImg(ImageView imgv){
+      try(FileInputStream input=new FileInputStream(Principal.pathImages+"Delivery.png")){
+          Image img=new Image(input);
+          imgv.setImage(img);
+      }catch(IOException e){
+          
+      }
+  }
+  
+  void closeWindows(){
+      try {
+
+            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 640, 480);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Stage myStage = (Stage) this.btnCerrar.getScene().getWindow();
+            myStage.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+  }
     
     
 }
