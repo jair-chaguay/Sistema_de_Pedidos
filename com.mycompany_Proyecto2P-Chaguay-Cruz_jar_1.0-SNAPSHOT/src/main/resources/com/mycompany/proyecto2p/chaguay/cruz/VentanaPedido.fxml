@@ -78,73 +78,76 @@
             <Insets left="30.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="168.0" prefWidth="713.0" spacing="70.0">
+      <HBox prefHeight="200.0" prefWidth="713.0" spacing="70.0">
          <children>
-            <GridPane fx:id="gridOpciones" alignment="TOP_CENTER" prefHeight="155.0" prefWidth="325.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="125.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="64.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="66.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="70.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="57.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
+            <VBox prefHeight="200.0" prefWidth="397.0">
                <children>
-                  <Label text="Precio" textAlignment="CENTER" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Cantidad" textAlignment="CENTER" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Descripción">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
+                  <GridPane fx:id="gridOpciones" alignment="TOP_CENTER" prefHeight="71.0" prefWidth="379.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="119.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="67.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="219.0" minWidth="0.0" prefWidth="94.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="57.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="27.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="161.0" minHeight="10.0" prefHeight="29.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Precio" textAlignment="CENTER" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Cantidad" textAlignment="CENTER" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Descripción">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
-            <GridPane fx:id="gridPedido" prefHeight="170.0" prefWidth="268.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="110.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="52.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="338.0">
                <children>
-                  <Label text="  Cantidad" textAlignment="CENTER" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label text="Total" textAlignment="CENTER" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label text="Descripcion" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
+                  <GridPane fx:id="gridPedido" prefHeight="92.0" prefWidth="170.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="55.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0" minWidth="10.0" prefWidth="35.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="52.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="74.0" minHeight="7.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="161.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label prefHeight="19.0" prefWidth="80.0" text="  Cantidad" textAlignment="CENTER" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="Total" textAlignment="CENTER" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="Descripcion" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
+            </VBox>
          </children>
       </HBox>
-      <VBox prefHeight="82.0" prefWidth="600.0">
+      <VBox prefHeight="70.0" prefWidth="713.0">
          <children>
             <Label fx:id="lblMensaje" prefHeight="17.0" prefWidth="382.0" text="Info:" textAlignment="RIGHT" textFill="#e40707">
                <font>

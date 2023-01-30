@@ -22,6 +22,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -144,8 +145,40 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
-        if(opcion.equals("Precio")){
-           gridPedido.getChildren().clear();}
+         gridPedido.getChildren().clear();
+        Thread hiloOrden = new Thread(new Runnable(){            
+            @Override
+            public void run(){
+                Platform.runLater(new Runnable(){        
+                @Override
+                public void run(){
+                    if(opcion.equals("Precio")){
+                        Collections.sort(listaPedidos, new Comparator<Pedido>(){
+                            @Override
+                            public int compare(Pedido p1,Pedido p2){
+                                return Double.compare(p1.valorTotal(),p2.valorTotal());
+
+                            }
+                        });
+                        mostrarEscogidos();
+
+                    }else if(opcion.equals("Nombre")){
+                        Collections.sort(listaPedidos, new Comparator<Pedido>(){
+                            @Override
+                            public int compare(Pedido p1,Pedido p2){
+                                return p1.getDescripcion().compareTo(p2.getDescripcion());
+
+                            }
+                        });    
+                        mostrarEscogidos();
+                    }  
+                }
+                });
+            }    
+        });
+        
+        hiloOrden.start();
+    }
 
         
 //            Label lblDescrp = new Label("Descripcion");
@@ -171,9 +204,6 @@ public class VentanaPedidoController implements Initializable {
 //////            mostrarEscogidos();
 //
 //        }
-
-    }
-
     @FXML
     void comboEvents(ActionEvent e) throws ValorInsuficienteException {
 
@@ -233,6 +263,96 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
+    
+//     @FXML
+//    public void comboEvents(ActionEvent ae)throws ValorInsuficienteException  {
+//        String opcion = cbxmenu.getValue();
+//
+//        if (opcion.equals("Platos Fuertes")) {
+//            String tipo = "F";
+//            
+//            Thread hilo1 = new Thread(new Runnable(){
+//                @Override
+//                public void run(){
+//                    Platform.runLater(new Runnable(){
+//                        @Override
+//                        public void run(){
+//                            try {
+//                                mostrarMenu(tipo);
+//                            } catch (ValorInsuficienteException ex) {
+//                                ex.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+//            
+//            hilo1.start();
+//
+//        } else if (opcion.equals("Piqueos")) {
+//            String tipo = "Q";
+//            
+//            Thread hilo2 = new Thread(new Runnable(){
+//                @Override
+//                public void run(){
+//                    Platform.runLater(new Runnable(){
+//                        @Override
+//                        public void run(){
+//                            try {
+//                                mostrarMenu(tipo);
+//                            } catch (ValorInsuficienteException ex) {
+//                                ex.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+//            
+//            hilo2.start();
+//
+//        } else if (opcion.equals("Postres")) {
+//            String tipo = "P";
+//           
+//            Thread hilo3 = new Thread(new Runnable(){
+//                @Override
+//                public void run(){
+//                    Platform.runLater(new Runnable(){
+//                        @Override
+//                        public void run(){
+//                            try {
+//                                mostrarMenu(tipo);
+//                            } catch (ValorInsuficienteException ex) {
+//                                ex.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+//            
+//            hilo3.start();
+//
+//        } else if (opcion.equals("Bebidas")) {
+//            String tipo = "B";
+//            
+//            Thread hilo4 = new Thread(new Runnable(){
+//                @Override
+//                public void run(){
+//                    Platform.runLater(new Runnable(){
+//                        @Override
+//                        public void run(){
+//                            try {
+//                                mostrarMenu(tipo);
+//                            } catch (ValorInsuficienteException ex) {
+//                                ex.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+//            
+//            hilo4.start();
+//        }
+//    }
 
     public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
@@ -270,10 +390,10 @@ public class VentanaPedidoController implements Initializable {
 
                 });
 
-                GridPane.setConstraints(lblDescrp, 0, i + 1);
-                GridPane.setConstraints(lblPrecio, 1, i + 1);
-                GridPane.setConstraints(cantidad, 2, i + 1);
-                GridPane.setConstraints(btnAgregar, 3, i + 1);
+                GridPane.setConstraints(lblDescrp, 0, i +1);
+                GridPane.setConstraints(lblPrecio, 1, i+1 );
+                GridPane.setConstraints(cantidad, 2, i+1);
+                GridPane.setConstraints(btnAgregar, 3,i +1);
                 gridOpciones.setVgap(10); //ESPACIADO ENTRE LINEAS           
                 gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, cantidad, btnAgregar);
 
@@ -321,10 +441,10 @@ public class VentanaPedidoController implements Initializable {
 
                 }
             }
-
+//
         });
 
-    }
+}
 
     @FXML
     void contPago(ActionEvent e) throws IOException {
