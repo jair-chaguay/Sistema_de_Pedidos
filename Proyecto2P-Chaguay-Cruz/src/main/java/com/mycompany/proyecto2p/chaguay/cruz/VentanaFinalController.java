@@ -111,7 +111,10 @@ public class VentanaFinalController implements Initializable {
         t2.start();
 
     }
-  
+  /**
+   * 
+   * @param imgv 
+   */
   void cargarImg(ImageView imgv){
       try(FileInputStream input=new FileInputStream(Principal.pathImages+"Delivery.png")){
           Image img=new Image(input);
@@ -120,7 +123,9 @@ public class VentanaFinalController implements Initializable {
           
       }
   }
-  
+  /**
+   * 
+   */
   void closeWindows(){
       try {
 
