@@ -14,3 +14,4 @@
 36,Juan Espinoza,26.88
 1388,Jair Chaguay,4.48
 85,Jair Chaguay,2.24
+9637,Juan Espinoza,6.72
