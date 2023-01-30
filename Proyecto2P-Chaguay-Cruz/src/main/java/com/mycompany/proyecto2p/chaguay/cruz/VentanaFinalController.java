@@ -46,7 +46,8 @@ public class VentanaFinalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        settearText();
+        p=leerPedido();
+        settearText(lblPedido);
         cargarImg();
         
         Thread t1 = new Thread(new Runnable() {
@@ -102,13 +103,12 @@ public class VentanaFinalController implements Initializable {
         return ped;
     }
 
-    void settearText() {
-        p = leerPedido();
+    void settearText(Label l) {       
         for (Pedidos pedido : p) {
             numeroPedido = String.valueOf(pedido.getIdPedido());
         }
         String set = "Su pedido Nro" + numeroPedido + "ha sido pegado y empezaremos a prepararlo";
-        lblPedido.setText(set);
+        l.setText(set);
     }
 
     
