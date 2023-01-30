@@ -48,7 +48,6 @@ public class VentanaFinalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         p=leerPedido();
         settearText(lblPedido);
-        cargarImg();
         
         Thread t1 = new Thread(new Runnable() {
         @Override
@@ -78,14 +77,6 @@ public class VentanaFinalController implements Initializable {
 
     }
 
-    void cargarImg() {
-        try ( FileInputStream input = new FileInputStream(Principal.pathImages + "Delivery.png")) {
-            Image img = new Image(input);
-            imgg.setImage(img);
-        } catch (IOException e) {
-            e.getMessage();
-        }
-    }
 
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();

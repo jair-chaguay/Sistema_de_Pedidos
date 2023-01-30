@@ -76,10 +76,10 @@ public class VentanaPagoController implements Initializable {
     double totalIVA;
 
     double totalPorc;
-    TextField txtTi = new TextField();
-    TextField txtNum = new TextField();
-    TextField txtcad = new TextField();
-    TextField txtcv = new TextField();
+    TextField txtTi;
+    TextField txtNum;
+    TextField txtcad;
+    TextField txtcv;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -108,6 +108,10 @@ public class VentanaPagoController implements Initializable {
             Label lblNumero = new Label("Número");
             Label lblCaducidad = new Label("Caducidad");
             Label lblCv = new Label("CVV");
+            txtTi = new TextField();
+            txtNum = new TextField();
+            txtcad = new TextField();
+            txtcv = new TextField();
             GridPane.setConstraints(lblTittular, 0, 0);
             GridPane.setConstraints(lblNumero, 0, 1);
             GridPane.setConstraints(lblCaducidad, 0, 2);
@@ -122,78 +126,81 @@ public class VentanaPagoController implements Initializable {
             Labeltxt.setText("Tendrá que pagar un total de " + totalPorc + " dólares por el incremento \ndel 5% por uso de la tarjeta");
             seccionDatos.getChildren().addAll(gdOpciones, Labeltxt);
             seccionDatos.setSpacing(20);
+            seccionDatos.setVisible(true);
         }
 
     }
 
     @FXML
     void MostrarFinal(ActionEvent e) {
-        
-        validacion();
-        try{
-        MostrarVentana(e);
-        }catch(IOException ex){
-            
-        }
-        ingresardatos();
-        
-    }
-    void validacion(){
-        if (btnIngresar.isPressed()) {
-            if (txtDireccion.getText().isEmpty()) {
+
+        if (txtDireccion.getText().equals("")) {
+            Alert al = new Alert(AlertType.ERROR);
+            al.setTitle("Error");
+            al.setHeaderText("Error: El campo de dirección se encuentra vacío");
+            al.setContentText("Ingrese un valor");
+            al.showAndWait();
+        } else if ((!(btnEfectivo.isSelected())) && (!(btnTarjeta.isSelected()))) {
+            Alert al = new Alert(AlertType.ERROR);
+            al.setTitle("Error");
+            al.setHeaderText("Error: No se ha seleccionado un método con que pagar");
+            al.setContentText("Seleccione un método para pagar");
+            al.showAndWait();
+        } else if (btnTarjeta.isSelected()) {
+            if (txtTi.getText().equals("")) {
                 Alert al = new Alert(AlertType.ERROR);
                 al.setTitle("Error");
-                al.setHeaderText("Error: El campo de dirección se encuentra vacío");
+                al.setHeaderText("Error: El campo de titular se encuentra vacío");
                 al.setContentText("Ingrese un valor");
-            }
-            if ((!(btnEfectivo.isSelected())) && (!(btnTarjeta.isSelected()))) {
+                al.showAndWait();
+            } else if (txtNum.getText().equals("")) {
                 Alert al = new Alert(AlertType.ERROR);
                 al.setTitle("Error");
-                al.setHeaderText("Error: No se ha seleccionado un método con que pagar");
-                al.setContentText("Seleccione un método para pagar");
-            }
-            if (btnTarjeta.isSelected()) {
-                if (txtTi.getText().equals("")) {
-                    Alert al = new Alert(AlertType.ERROR);
-                    al.setTitle("Error");
-                    al.setHeaderText("Error: El campo de titular se encuentra vacío");
-                    al.setContentText("Ingrese un valor");
-                } else if (txtNum.getText().equals("")) {
-                    Alert al = new Alert(AlertType.ERROR);
-                    al.setTitle("Error");
-                    al.setHeaderText("Error: El campo del numero de tarjeta se encuentra vacío");
-                    al.setContentText("Ingrese un valor");
-                } else if (txtcad.getText().equals("")) {
-                    Alert al = new Alert(AlertType.ERROR);
-                    al.setTitle("Error");
-                    al.setHeaderText("Error: El campo de caducidad se encuentra vacío");
-                    al.setContentText("Ingrese un valor");
-                } else if (txtcv.getText().equals("")) {
-                    Alert al = new Alert(AlertType.ERROR);
-                    al.setTitle("Error");
-                    al.setHeaderText("Error: El campo de CVV se encuentra vacío");
-                    al.setContentText("Ingrese un valor");
+                al.setHeaderText("Error: El campo del numero de tarjeta se encuentra vacío");
+                al.setContentText("Ingrese un valor");
+                al.showAndWait();
+            } else if (txtcad.getText().equals("")) {
+                Alert al = new Alert(AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Error: El campo de caducidad se encuentra vacío");
+                al.setContentText("Ingrese un valor");
+                al.showAndWait();
+            } else if (txtcv.getText().equals("")) {
+                Alert al = new Alert(AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Error: El campo de CVV se encuentra vacío");
+                al.setContentText("Ingrese un valor");
+                al.showAndWait();
+
+            } else {
+                try {
+                    MostrarVentana(e);
+                } catch (IOException ex) {
+
                 }
+                ingresardatos();
+
             }
 
-            
         }
-    }
-    void MostrarVentana(ActionEvent a) throws IOException{
-        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaFinal.fxml"));
-            try {
-                Parent root = loader.load();
 
-                VentanaFinalController controlador = loader.getController();
-                Scene scene = new Scene(root, 640, 600);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();                
-                Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
-                myStage.close();
-            } catch (IOException ex) {
-                ex.getMessage();
-            }
+    }
+
+    void MostrarVentana(ActionEvent a) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaFinal.fxml"));
+        try {
+            Parent root = loader.load();
+
+            VentanaFinalController controlador = loader.getController();
+            Scene scene = new Scene(root, 640, 600);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Stage myStage = (Stage) this.btnIngresar.getScene().getWindow();
+            myStage.close();
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
     }
 
     public int crearCodigo() {
