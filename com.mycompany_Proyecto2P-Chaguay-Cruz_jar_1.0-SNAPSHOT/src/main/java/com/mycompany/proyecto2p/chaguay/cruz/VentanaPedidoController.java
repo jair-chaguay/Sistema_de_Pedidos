@@ -6,7 +6,7 @@ package com.mycompany.proyecto2p.chaguay.cruz;
 
 import static com.mycompany.proyecto2p.chaguay.cruz.VentanaSistemaController.usuariosI;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Menu;
-import com.mycompany.proyecto2p.chaguay.cruz.modelo.NombreComparator;
+import com.mycompany.proyecto2p.chaguay.cruz.modelo.nombreComparator;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedido;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Pedidos;
 import com.mycompany.proyecto2p.chaguay.cruz.modelo.Usuario;
@@ -144,31 +144,33 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
-        if (opcion.equals("Precio")) {
-            gridPedido.getChildren().clear();
-            Label lblDescrp = new Label("Descripcion");
-            Label lblPrecio = new Label("Precio");
-            Label lblCantidad = new Label("Cantidad");
-            GridPane.setConstraints(lblDescrp, 0, 0);
-            GridPane.setConstraints(lblPrecio, 1, 0);
-            GridPane.setConstraints(lblCantidad, 2, 0);
-            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
-            Collections.sort(listaPedidos);
+        if(opcion.equals("Precio")){
+           gridPedido.getChildren().clear();}
+
+        
+//            Label lblDescrp = new Label("Descripcion");
+//            Label lblPrecio = new Label("Precio");
+//            Label lblCantidad = new Label("Cantidad");
+//            GridPane.setConstraints(lblDescrp, 0, 0);
+//            GridPane.setConstraints(lblPrecio, 1, 0);
+//            GridPane.setConstraints(lblCantidad, 2, 0);
+//            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+//            Collections.sort(listaPedidos);
 //            mostrarEscogidos();
 
-        } else if (opcion.equals("Nombre")) {
-            gridPedido.getChildren().clear();
-            Label lblDescrp = new Label("Descripcion");
-            Label lblPrecio = new Label("Precio");
-            Label lblCantidad = new Label("Cantidad");
-            GridPane.setConstraints(lblDescrp, 0, 0);
-            GridPane.setConstraints(lblPrecio, 1, 0);
-            GridPane.setConstraints(lblCantidad, 2, 0);
-            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
-            Collections.sort(listaPedidos, new NombreComparator());
-//            mostrarEscogidos();
-
-        }
+//        if (opcion.equals("Nombre")) {
+//            gridPedido.getChildren().clear();
+////            Label lblDescrp = new Label("Descripcion");
+////            Label lblPrecio = new Label("Precio");
+////            Label lblCantidad = new Label("Cantidad");
+////            GridPane.setConstraints(lblDescrp, 0, 0);
+////            GridPane.setConstraints(lblPrecio, 1, 0);
+////            GridPane.setConstraints(lblCantidad, 2, 0);
+////            gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+////            Collections.sort(listaPedidos, new nombreComparator());
+//////            mostrarEscogidos();
+//
+//        }
 
     }
 
@@ -332,7 +334,8 @@ public class VentanaPedidoController implements Initializable {
     }
 
     void mostrarVentana(ActionEvent ae) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
+        FXMLLoader loader = new FXMLLoader(Principal.class
+                .getResource("VentanaPago.fxml"));
         try {
             Parent root = loader.load();
 
@@ -349,28 +352,7 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
-//    public void registrarPedido(ArrayList<Pedido> listaPedido) {
-//            for (Pedido p : listaPedido) {
-//                total += p.getValor();
-//                totalIVA = (total + (total * 0.12))/2;
-//                cliente=p.getNombreCliente();
-//                
-//            }
-//        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt",true))) {
-//            
-//            
-//                bw.write(crearCodigo() + "," + cliente + "," + totalIVA);
-//            
-//        } catch (IOException ioe) {
-//            System.out.println("Se ha registrado un error al registrar el pedido!");
-//
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("Error de Registro");
-//            alerta.setHeaderText("No ha sido posible registrar este pedido");
-//            alerta.showAndWait();
-//
-//        }
-//    }
+
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
         double valorTotal = 0;
         for (Pedido p : listaPedido) {
@@ -457,7 +439,8 @@ public class VentanaPedidoController implements Initializable {
 
     public void closeWindows() {
         try {
-            FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
+            FXMLLoader loader = new FXMLLoader(Principal.class
+                    .getResource("VentanaPedido.fxml"));
 
             Parent root = loader.load();
             VentanaPagoController controlador = loader.getController();
