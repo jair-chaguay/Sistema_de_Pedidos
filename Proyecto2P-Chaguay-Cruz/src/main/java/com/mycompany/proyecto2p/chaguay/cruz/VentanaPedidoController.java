@@ -51,7 +51,6 @@ import javafx.stage.Stage;
  *
  * @author mcruz
  */
-
 public class VentanaPedidoController implements Initializable {
 
     static ArrayList<Menu> menulista = new ArrayList<>();
@@ -60,11 +59,12 @@ public class VentanaPedidoController implements Initializable {
     double total;
     double totalIVA;
     String cliente;
-/**
- * 
- * @param url
- * @param rb 
- */
+
+    /**
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -111,10 +111,11 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private Label lblMensaje;
-/**
- * 
- * @return 
- */
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<Menu> leerArchivo() {
         ArrayList<Menu> menulista = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader(Principal.pathFiles + "Menu.txt", StandardCharsets.UTF_8))) {
@@ -131,10 +132,11 @@ public class VentanaPedidoController implements Initializable {
         }
         return menulista;
     }
-/**
- * 
- * @throws IOException 
- */
+
+    /**
+     *
+     * @throws IOException
+     */
     void cargarCombo() throws IOException {
         ArrayList<String> tipos = new ArrayList<>();
         tipos.add("Platos Fuertes");
@@ -144,10 +146,11 @@ public class VentanaPedidoController implements Initializable {
         cbxmenu.getItems().setAll(tipos);
 
     }
-/**
- * 
- * @throws IOException 
- */
+
+    /**
+     *
+     * @throws IOException
+     */
     void cargarCombo2() throws IOException {
         ArrayList<String> ordenar = new ArrayList<>();
         ordenar.add("Precio");
@@ -155,35 +158,35 @@ public class VentanaPedidoController implements Initializable {
         cbxordenar.getItems().setAll(ordenar);
 
     }
-/**
- * 
- * @param e 
- */
+
+    /**
+     *
+     * @param e
+     */
     @FXML
     void ordenarPor(ActionEvent e) {
         String opcion = cbxordenar.getValue();
         gridPedido.getChildren().clear();
-        Thread orden=new Thread(new Runnable(){
+        Thread orden = new Thread(new Runnable() {
             @Override
-            public void run(){
-                Platform.runLater(new Runnable(){
+            public void run() {
+                Platform.runLater(new Runnable() {
                     @Override
-                    public void run(){
-                        if(opcion.equals("Precio")){
-                            Collections.sort(listaPedidos, new Comparator<Pedido>(){
-                                public int compare(Pedido p1, Pedido p2){
+                    public void run() {
+                        if (opcion.equals("Precio")) {
+                            Collections.sort(listaPedidos, new Comparator<Pedido>() {
+                                public int compare(Pedido p1, Pedido p2) {
                                     return Double.compare(p1.valorTotal(), p2.valorTotal());
                                 }
-                                
+
                             });
                             mostrarEscogidos();
-                        
-                        
-                        }else if(opcion.equals("Nombre")){
-                            Collections.sort(listaPedidos,new Comparator<Pedido>(){
-                               public int compare(Pedido p1,Pedido p2) {
-                                   return p1.getDescripcion().compareTo(p2.getDescripcion());
-                               }
+
+                        } else if (opcion.equals("Nombre")) {
+                            Collections.sort(listaPedidos, new Comparator<Pedido>() {
+                                public int compare(Pedido p1, Pedido p2) {
+                                    return p1.getDescripcion().compareTo(p2.getDescripcion());
+                                }
                             });
                             mostrarEscogidos();
                         }
@@ -194,11 +197,12 @@ public class VentanaPedidoController implements Initializable {
         orden.start();
 
     }
-/**
- * 
- * @param e
- * @throws ValorInsuficienteException 
- */
+
+    /**
+     *
+     * @param e
+     * @throws ValorInsuficienteException
+     */
     @FXML
     void comboEvents(ActionEvent e) throws ValorInsuficienteException {
 
@@ -258,11 +262,12 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-/**
- * 
- * @param tipo
- * @throws ValorInsuficienteException 
- */
+
+    /**
+     *
+     * @param tipo
+     * @throws ValorInsuficienteException
+     */
     public void mostrarMenu(String tipo) throws ValorInsuficienteException {
         for (int i = 0; i < menulista.size(); i++) {
             Menu menu = menulista.get(i);
@@ -311,12 +316,13 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-/**
- * 
- * @param cantidad
- * @param text
- * @throws ValorInsuficienteException 
- */
+
+    /**
+     *
+     * @param cantidad
+     * @param text
+     * @throws ValorInsuficienteException
+     */
     static void valorErroneo(String cantidad, TextField text) throws ValorInsuficienteException {
         if (Integer.parseInt(cantidad) == 0 || text == null) {
             throw new ValorInsuficienteException("Ingresar un número válido");
@@ -324,9 +330,10 @@ public class VentanaPedidoController implements Initializable {
         }
 
     }
-/**
- * 
- */
+
+    /**
+     *
+     */
     public void mostrarEscogidos() {
         Platform.runLater(new Runnable() {
 
@@ -361,11 +368,12 @@ public class VentanaPedidoController implements Initializable {
         });
 
     }
-/**
- * 
- * @param e
- * @throws IOException 
- */
+
+    /**
+     *
+     * @param e
+     * @throws IOException
+     */
     @FXML
     void contPago(ActionEvent e) throws IOException {
         mostrarVentana(e);
@@ -373,11 +381,12 @@ public class VentanaPedidoController implements Initializable {
         serializar(listPed);
 
     }
-/**
- * 
- * @param ae
- * @throws IOException 
- */
+
+    /**
+     *
+     * @param ae
+     * @throws IOException
+     */
     void mostrarVentana(ActionEvent ae) throws IOException {
         FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPago.fxml"));
         try {
@@ -396,39 +405,38 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
-/**
- * 
- * @param listaPedido 
- */
+    /**
+     *
+     * @param listaPedido
+     */
     public void registrarPedido(ArrayList<Pedido> listaPedido) {
-        double valorTotal=0;
+        double valorTotal = 0;
         for (Pedido p : listaPedido) {
-            valorTotal+=p.valorTotal()+(p.valorTotal()*0.12);
+            valorTotal += p.valorTotal() + (p.valorTotal() * 0.12);
         }
-            
-            
 
-            try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter("Pedidos.txt"))) {
 
-                bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal);
-                bw.newLine();
+            bw.write(crearCodigo() + "," + listaPedidos.get(0).getNombreCliente() + "," + valorTotal);
+            bw.newLine();
 
-            } catch (IOException ioe) {
-                System.out.println("Se ha registrado un error al registrar el pedido!");
+        } catch (IOException ioe) {
+            System.out.println("Se ha registrado un error al registrar el pedido!");
 
-                Alert alerta = new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("Error de Registro");
-                alerta.setHeaderText("No ha sido posible registrar este pedido");
-                alerta.showAndWait();
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error de Registro");
+            alerta.setHeaderText("No ha sido posible registrar este pedido");
+            alerta.showAndWait();
 
-            }
-        
+        }
+
     }
     //METODO PARA CREAR ID PEDIDO
-/**
- * 
- * @return 
- */
+
+    /**
+     *
+     * @return
+     */
     public int crearCodigo() {
         String opciones = "1234567890";
         String cadena = "";
@@ -442,10 +450,11 @@ public class VentanaPedidoController implements Initializable {
         return valor;
 
     }
-/**
- * 
- * @return 
- */
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<Pedidos> leerPedido() {
         ArrayList<Pedidos> ped = new ArrayList<>();
         try ( BufferedReader bfr = new BufferedReader(new FileReader("Pedidos.txt", StandardCharsets.UTF_8))) {
@@ -461,13 +470,14 @@ public class VentanaPedidoController implements Initializable {
         }
         return ped;
     }
-/**
- * 
- * @param pedidolist 
- */
-    void serializar(ArrayList<Pedidos> pedidolist) {        
+
+    /**
+     *
+     * @param pedidolist
+     */
+    void serializar(ArrayList<Pedidos> pedidolist) {
         for (Pedidos li : pedidolist) {
-            
+
             try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + li.getIdPedido() + ".bin"))) {
                 obj.writeObject(pedidolist);
 
@@ -477,22 +487,32 @@ public class VentanaPedidoController implements Initializable {
 
         }
     }
-/**
- * 
- * @param ev 
- */
+
+    /**
+     *
+     * @param ev
+     */
     @FXML
     void limpiar(ActionEvent ev) {
-       gridOpciones.getChildren().clear();
+        gridOpciones.getChildren().clear();
         gridPedido.getChildren().clear();
-        listaPedidos.clear();        
+        listaPedidos.clear();
+        Label lblDescrp = new Label("Descripcion");
+        Label lblPrecio = new Label("Precio");
+        Label lblCantidad = new Label("Cantidad");
+        GridPane.setConstraints(lblDescrp, 0, 0);
+        GridPane.setConstraints(lblPrecio, 1, 0);
+        GridPane.setConstraints(lblCantidad, 2, 0);
+        gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+        gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
         lblTotal.setText("0.0");
         lblSubtotal.setText("0.0");
 
     }
-/**
- * 
- */
+
+    /**
+     *
+     */
     public void closeWindows() {
         try {
             FXMLLoader loader = new FXMLLoader(Principal.class.getResource("VentanaPedido.fxml"));
