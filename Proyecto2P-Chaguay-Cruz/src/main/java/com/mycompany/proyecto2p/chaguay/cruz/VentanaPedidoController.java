@@ -494,7 +494,7 @@ public class VentanaPedidoController implements Initializable {
      */
     @FXML
     void limpiar(ActionEvent ev) {
-        gridOpciones.getChildren().clear();
+        
         gridPedido.getChildren().clear();
         listaPedidos.clear();
         Label lblDescrp = new Label("Descripcion");
@@ -503,10 +503,11 @@ public class VentanaPedidoController implements Initializable {
         GridPane.setConstraints(lblDescrp, 0, 0);
         GridPane.setConstraints(lblPrecio, 1, 0);
         GridPane.setConstraints(lblCantidad, 2, 0);
-        gridOpciones.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
+        
         gridPedido.getChildren().addAll(lblDescrp, lblPrecio, lblCantidad);
         lblTotal.setText("0.0");
         lblSubtotal.setText("0.0");
+        lblIva.setText("0.0");
 
     }
 
